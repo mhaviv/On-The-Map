@@ -13,6 +13,8 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    var locations: [MapLocation] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // set initial location in NYC
@@ -21,12 +23,17 @@ class MapViewController: UIViewController {
         
         mapView.delegate = self
         
+        loadInitialData()
+        mapView.addAnnotations(locations)
+        
+        /*
         // Annotation Example
         let mapPin = MapLocation(locationName: "Loeb Boathouse Restaurant",
                                  coordinate: CLLocationCoordinate2D(latitude: 40.7752771, longitude: -73.9687257),
-                                 website: "http://www.thecentralparkboathouse.com")
+                                 website: "http:www.thecentralparkboathouse.com")
         // Add Annotation
         mapView.addAnnotation(mapPin)
+        */
         
     }
     
@@ -35,6 +42,22 @@ class MapViewController: UIViewController {
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
                                                   latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
       mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    func loadInitialData() {
+      // 1
+      guard let fileName = Bundle.main.path(forResource: "MOCK_DATA", ofType: "json")
+        else { return }
+      let optionalData = try? Data(contentsOf: URL(fileURLWithPath: fileName))
+
+      guard
+        let data = optionalData,
+        let json = try? JSONSerialization.jsonObject(with: data),
+        let dictionary = json as? [String: Any],
+        let works = dictionary["data"] as? [[Any]]
+        else { return }
+        let validWorks = works.compactMap { MapLocation(json: $0) }
+      locations.append(contentsOf: validWorks)
     }
 }
 
