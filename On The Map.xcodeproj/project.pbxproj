@@ -17,7 +17,6 @@
 		CCC322B82377AA2200A48791 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B72377AA2200A48791 /* LoginViewController.swift */; };
 		CCC322BA2377AC6A00A48791 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B92377AC6A00A48791 /* ListCell.swift */; };
 		CCC322BE2377B71200A48791 /* MapLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322BD2377B71200A48791 /* MapLocation.swift */; };
-		CCC322C02378E39200A48791 /* MOCK_DATA.json in Resources */ = {isa = PBXBuildFile; fileRef = CCC322BF2378E39100A48791 /* MOCK_DATA.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +51,6 @@
 		CCC322B72377AA2200A48791 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CCC322B92377AC6A00A48791 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		CCC322BD2377B71200A48791 /* MapLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocation.swift; sourceTree = "<group>"; };
-		CCC322BF2378E39100A48791 /* MOCK_DATA.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = MOCK_DATA.json; path = ../../../../Downloads/MOCK_DATA.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +99,10 @@
 		1E01E19E2371ED630059779E /* On The Map */ = {
 			isa = PBXGroup;
 			children = (
-				CCC322BF2378E39100A48791 /* MOCK_DATA.json */,
-				CCC5F9BB2373D0C60054B4A2 /* Model */,
 				1E01E19F2371ED630059779E /* AppDelegate.swift */,
 				1E01E1A12371ED630059779E /* SceneDelegate.swift */,
-				1E01E1A52371ED630059779E /* Main.storyboard */,
-				1E01E1AA2371ED6E0059779E /* LaunchScreen.storyboard */,
 				1E01E1AD2371ED6E0059779E /* Info.plist */,
-				CCC5F9BE2373D0E60054B4A2 /* ViewModel */,
+				CCC5F9BB2373D0C60054B4A2 /* Model */,
 				CCC5F9BC2373D0CF0054B4A2 /* View */,
 				CCC5F9C323746BA00054B4A2 /* Controller */,
 				CCC5F9C423746BA70054B4A2 /* Assets */,
@@ -116,11 +110,19 @@
 			path = "On The Map";
 			sourceTree = "<group>";
 		};
+		1EDF4332237B543E005BA256 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
 		CCC5F9BB2373D0C60054B4A2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CCC5F9C22373D2330054B4A2 /* New Group */,
 				CCC5F9BF2373D1FC0054B4A2 /* Data */,
+				CCC5F9C22373D2330054B4A2 /* Requests */,
+				1EDF4332237B543E005BA256 /* Responses */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -128,15 +130,10 @@
 		CCC5F9BC2373D0CF0054B4A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1E01E1A52371ED630059779E /* Main.storyboard */,
+				1E01E1AA2371ED6E0059779E /* LaunchScreen.storyboard */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		CCC5F9BE2373D0E60054B4A2 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		CCC5F9BF2373D1FC0054B4A2 /* Data */ = {
@@ -146,11 +143,11 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		CCC5F9C22373D2330054B4A2 /* New Group */ = {
+		CCC5F9C22373D2330054B4A2 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "New Group";
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		CCC5F9C323746BA00054B4A2 /* Controller */ = {
@@ -277,7 +274,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCC322C02378E39200A48791 /* MOCK_DATA.json in Resources */,
 				1E01E1AC2371ED6E0059779E /* LaunchScreen.storyboard in Resources */,
 				1E01E1A92371ED6D0059779E /* Assets.xcassets in Resources */,
 				1E01E1A72371ED630059779E /* Main.storyboard in Resources */,
