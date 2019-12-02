@@ -12,12 +12,11 @@
 		1E01E1A72371ED630059779E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E01E1A52371ED630059779E /* Main.storyboard */; };
 		1E01E1A92371ED6D0059779E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E01E1A82371ED6D0059779E /* Assets.xcassets */; };
 		1E01E1AC2371ED6E0059779E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E01E1AA2371ED6E0059779E /* LaunchScreen.storyboard */; };
+		CC5FE50A23948962006816AF /* StudentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FE50923948962006816AF /* StudentData.swift */; };
 		CC99F25B2383AA0400577107 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99F25A2383AA0400577107 /* UdacityClient.swift */; };
 		CC99F25D2383AE9D00577107 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99F25C2383AE9D00577107 /* LoginRequest.swift */; };
 		CC99F26523862ABD00577107 /* UdacityClientHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99F26423862ABD00577107 /* UdacityClientHelper.swift */; };
-		CC99F26723878AEE00577107 /* AccountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99F26623878AED00577107 /* AccountResponse.swift */; };
 		CC99F26923878AFF00577107 /* SessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99F26823878AFF00577107 /* SessionResponse.swift */; };
-		CC99F26B23878B0E00577107 /* AccountInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99F26A23878B0E00577107 /* AccountInfoResponse.swift */; };
 		CCC322B12377A7DC00A48791 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B02377A7DC00A48791 /* MapViewController.swift */; };
 		CCC322B32377A91400A48791 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B22377A91400A48791 /* ListViewController.swift */; };
 		CCC322B82377AA2200A48791 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B72377AA2200A48791 /* LoginViewController.swift */; };
@@ -52,12 +51,11 @@
 		1E01E1AD2371ED6E0059779E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E01E1B22371ED6E0059779E /* On The MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On The MapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E01E1BD2371ED6E0059779E /* On The MapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On The MapUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC5FE50923948962006816AF /* StudentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentData.swift; sourceTree = "<group>"; };
 		CC99F25A2383AA0400577107 /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		CC99F25C2383AE9D00577107 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginRequest.swift; path = "On The Map/Model/LoginRequest.swift"; sourceTree = SOURCE_ROOT; };
 		CC99F26423862ABD00577107 /* UdacityClientHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClientHelper.swift; sourceTree = "<group>"; };
-		CC99F26623878AED00577107 /* AccountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountResponse.swift; path = "On The Map/Model/AccountResponse.swift"; sourceTree = SOURCE_ROOT; };
 		CC99F26823878AFF00577107 /* SessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SessionResponse.swift; path = "On The Map/Model/SessionResponse.swift"; sourceTree = SOURCE_ROOT; };
-		CC99F26A23878B0E00577107 /* AccountInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountInfoResponse.swift; path = "On The Map/Model/AccountInfoResponse.swift"; sourceTree = SOURCE_ROOT; };
 		CCC322B02377A7DC00A48791 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CCC322B22377A91400A48791 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		CCC322B72377AA2200A48791 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -125,9 +123,7 @@
 		1EDF4332237B543E005BA256 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				CC99F26623878AED00577107 /* AccountResponse.swift */,
 				CC99F26823878AFF00577107 /* SessionResponse.swift */,
-				CC99F26A23878B0E00577107 /* AccountInfoResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -156,6 +152,7 @@
 		CCC5F9BF2373D1FC0054B4A2 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CC5FE50923948962006816AF /* StudentData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -320,12 +317,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC99F26923878AFF00577107 /* SessionResponse.swift in Sources */,
-				CC99F26B23878B0E00577107 /* AccountInfoResponse.swift in Sources */,
-				CC99F26723878AEE00577107 /* AccountResponse.swift in Sources */,
 				CC99F25B2383AA0400577107 /* UdacityClient.swift in Sources */,
 				1E01E1A02371ED630059779E /* AppDelegate.swift in Sources */,
 				1E01E1A22371ED630059779E /* SceneDelegate.swift in Sources */,
 				CC99F26523862ABD00577107 /* UdacityClientHelper.swift in Sources */,
+				CC5FE50A23948962006816AF /* StudentData.swift in Sources */,
 				CCC322B12377A7DC00A48791 /* MapViewController.swift in Sources */,
 				CCC322BE2377B71200A48791 /* MapLocation.swift in Sources */,
 				CC99F25D2383AE9D00577107 /* LoginRequest.swift in Sources */,

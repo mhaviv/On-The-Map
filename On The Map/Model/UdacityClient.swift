@@ -45,7 +45,7 @@ class UdacityClient {
                 }
             } catch {
                 do {
-                    let errorResponse = try decoder.decode(AccountInfoResponse.self, from: data) as! Error
+                    let errorResponse = try decoder.decode(SessionResponse.self, from: data) as! Error
                     DispatchQueue.main.async {
                         completion(nil, errorResponse)
                     }
@@ -73,6 +73,7 @@ class UdacityClient {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 DispatchQueue.main.async {
+                    print("No data found")
                     completion(nil, error)
                 }
                 return
@@ -82,10 +83,11 @@ class UdacityClient {
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
+                    print("success!")
                 }
             } catch {
                 do {
-                    let errorResponse = try decoder.decode(AccountInfoResponse.self, from: data) as! Error
+                    let errorResponse = try decoder.decode(SessionResponse.self, from: data) as! Error
                     DispatchQueue.main.async {
                         completion(nil, errorResponse)
                         print("here!")
@@ -108,9 +110,9 @@ class UdacityClient {
 
         let url = Endpoint.sessionURL.url
 
-        let body = LoginRequest(username: username, password: password)
+        let body = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: .utf8)!
 
-        taskForPostRequest(url: url, responseType: SessionResponse.self, body: body) { response, error in
+        taskForPostRequest(url: url, responseType: Session.self, body: body) { response, error in
             if let response = response {
                 print(response.expiration)
                 completion(true, nil)

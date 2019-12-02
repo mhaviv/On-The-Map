@@ -8,7 +8,18 @@
 
 import Foundation
 
-struct SessionResponse: Decodable {
-    let id : String
-    let expiration : String
+struct Session: Decodable {
+    let id: String
+    let expiration: String
 }
+
+struct Account: Decodable {
+    let registered: Bool
+    let key: String
+}
+
+struct SessionResponse: Decodable {
+    let account: Account
+    let session: Session
+}
+
