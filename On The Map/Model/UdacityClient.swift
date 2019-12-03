@@ -64,60 +64,54 @@ class UdacityClient {
         return task
     }
     
-    func taskForPostRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
+    
+    func taskForPostRequest(withURL url: URL, body: Data, completion: @escaping (SessionResponse?, Error?) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(body)
+        // We cannot encode the body before its converted to raw data
+        request.httpBody = body
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
-                DispatchQueue.main.async {
-                    print("No data found")
-                    completion(nil, error)
-                }
+                completion(nil, error)
+                
                 return
             }
-            let decoder = JSONDecoder()
-            do {
-                let responseObject = try decoder.decode(ResponseType.self, from: data)
-                DispatchQueue.main.async {
-                    completion(responseObject, nil)
-                    print("success!")
-                }
-            } catch {
-                do {
-                    let errorResponse = try decoder.decode(SessionResponse.self, from: data) as! Error
-                    DispatchQueue.main.async {
-                        completion(nil, errorResponse)
-                        print("here!")
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completion(nil, error)
-                        print("there!")
-                    }
-                }
-            }
+            
             let range = 5..<data.count
             let newData = data.subdata(in: range) /* subset response data! */
             print(String(data: newData, encoding: .utf8)!)
+        
+            let decoder = JSONDecoder()
+            do {
+                // decode is taking data, converting it into raw data and then parsing it into JSON
+                let responseObject = try decoder.decode(SessionResponse.self, from: newData)
+                completion(responseObject, nil)
+                print("success!")
+            } catch {
+                completion(nil, error)
+                print("here!")
+                    
+               
+            }
+            
         }
         task.resume()
     }
         
-    func AuthenticateUser(username: String, password: String, _ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    func AuthenticateUser(username: String, password: String, _ completion: @escaping (_ response: SessionResponse?, _ error: Error?) -> Void) {
 
         let url = Endpoint.sessionURL.url
 
         let body = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: .utf8)!
 
-        taskForPostRequest(url: url, responseType: Session.self, body: body) { response, error in
+        taskForPostRequest(withURL: url, body: body) { response, error in
             if let response = response {
-                print(response.expiration)
-                completion(true, nil)
+                print(response.session?.expiration)
+                completion(response, nil)
             } else {
-                completion(false, error?.localizedDescription as? Error)
+                completion(nil, error)
             }
         }
 

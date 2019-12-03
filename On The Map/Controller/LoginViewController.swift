@@ -15,6 +15,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
+    var session: SessionResponse!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,21 +48,20 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
-    
     @IBAction func loginPressed(_ sender: Any) {
         
         if emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             displayAlert(title: "Login Unsuccessful", message: "Username or Password is empty")
         } else {
-            UdacityClient.sharedInstance().AuthenticateUser(username: emailTextField.text!, password: passwordTextField.text!) { (success, error) in
+            UdacityClient.sharedInstance().AuthenticateUser(username: emailTextField.text!, password: passwordTextField.text!) { (response, error) in
                 
-                if success {
+                if let sessionResponse = response  {
+                    self.session = sessionResponse
+                    // Use main thread to update UI changes
                     DispatchQueue.main.async {
                         self.loginComplete()
                         print("Login Successful!")
                     }
-                    
                 } else if error != nil {
                     DispatchQueue.main.async {
                         self.displayAlert(title: "Login Unsuccessful", message: "\(error!.localizedDescription)")
@@ -75,7 +76,7 @@ class LoginViewController: UIViewController {
     }
     
     private func loginComplete() {
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapView")
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeTab")
         self.present(controller, animated: true, completion: nil)
     }
 }
