@@ -88,14 +88,54 @@ class UdacityClient {
                 // decode is taking data, converting it into raw data and then parsing it into JSON
                 let responseObject = try decoder.decode(SessionResponse.self, from: newData)
                 completion(responseObject, nil)
-                print("success!")
             } catch {
                 completion(nil, error)
-                print("here!")
-                    
-               
+            }
+        }
+        task.resume()
+    }
+    
+    func taskForDeleteRequest(withURL url: URL, completion: @escaping (Session?, Error?) -> Void) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" {
+                xsrfCookie = cookie
+            }
+        }
+        
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                completion(nil, error)
+                return
+
             }
             
+            if error != nil {
+                completion(nil, error)
+                
+                return
+            }
+            
+            let range = 5..<data.count
+            let newData = data.subdata(in: range) /* subset response data! */
+            print(String(data: newData, encoding: .utf8)!)
+            
+            let decoder = JSONDecoder()
+            
+            do {
+                let responseObject = try decoder.decode(Session.self, from: newData)
+                completion(responseObject, nil)
+            } catch {
+                completion(nil, error)
+            }
         }
         task.resume()
     }
@@ -115,6 +155,21 @@ class UdacityClient {
             }
         }
 
+    }
+    
+    func LogoutUser(completion: @escaping (_ response: Session?, _ error: Error?) -> Void) {
+        
+        let url = Endpoint.sessionURL.url
+        
+        taskForDeleteRequest(withURL: url) { response, error in
+            if let response = response {
+                completion(response, nil)
+            } else {
+                completion(nil, error)
+            }
+            
+        }
+        
     }
     
    class func sharedInstance() -> UdacityClient {
