@@ -17,7 +17,6 @@ class LoginViewController: UIViewController {
     
     var session: SessionResponse!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,6 +60,7 @@ class LoginViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.loginComplete()
                         print("Login Successful!")
+                        logInStruct.loggedIn = true
                     }
                 } else if error != nil {
                     DispatchQueue.main.async {

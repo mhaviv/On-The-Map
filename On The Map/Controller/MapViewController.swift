@@ -34,7 +34,8 @@ class MapViewController: UIViewController {
         // Add Annotation
         mapView.addAnnotation(mapPin)
         */
-        
+        print("Login: \(LoginViewController.logInStruct.loggedIn)")
+
     }
     
     let regionRadius: CLLocationDistance = 10000
