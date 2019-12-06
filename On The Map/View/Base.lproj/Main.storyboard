@@ -32,7 +32,7 @@
                     <navigationItem key="navigationItem" title="On The Map" id="KtA-4K-49w">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="L6l-Bm-o8q">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WKf-SK-VQ1">
-                                <rect key="frame" x="16" y="7" width="92" height="30"/>
+                                <rect key="frame" x="16" y="10" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
@@ -100,7 +100,7 @@
                                                         <rect key="frame" x="0.0" y="39" width="206" height="34"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hvW-DW-2IS">
                                                         <rect key="frame" x="0.0" y="78" width="206" height="30"/>
@@ -184,7 +184,7 @@
                     <navigationItem key="navigationItem" title="On The Map" id="Dph-pA-exU">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="k8q-ec-uJ5">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="g1f-P1-CYf">
-                                <rect key="frame" x="16" y="7" width="92" height="30"/>
+                                <rect key="frame" x="16" y="10" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
                             </button>
@@ -208,7 +208,7 @@
                 <navigationController id="qcp-sJ-CSX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="vOp-gb-Ton"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q8L-2D-Ao9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
