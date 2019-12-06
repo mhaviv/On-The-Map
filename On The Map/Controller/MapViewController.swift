@@ -8,6 +8,7 @@
 
 import Foundation
 import MapKit
+import UIKit
 
 class MapViewController: UIViewController {
     
@@ -34,8 +35,6 @@ class MapViewController: UIViewController {
         // Add Annotation
         mapView.addAnnotation(mapPin)
         */
-        print("Login: \(LoginViewController.logInStruct.loggedIn)")
-
     }
     
     let regionRadius: CLLocationDistance = 10000
@@ -60,6 +59,12 @@ class MapViewController: UIViewController {
         let validWorks = works.compactMap { MapLocation(json: $0) }
       locations.append(contentsOf: validWorks)
     }
+    
+    @IBAction func logoutPressed(_ sender: Any) {
+        // identify the data you need for logout, modify the logout function to take that data and call API function from logout.
+        TabBarViewController.sharedInstance().logout()
+    }
+    
 }
 
 // Present visual indicator when tapping map pin

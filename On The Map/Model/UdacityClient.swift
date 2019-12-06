@@ -6,6 +6,8 @@
 //  Copyright © 2019 Michael Haviv. All rights reserved.
 //
 
+// Void is used for when function is hit before async call is made it returns nothing but when async call is made it returns the response and error
+
 import Foundation
 
 class UdacityClient {
@@ -29,39 +31,27 @@ class UdacityClient {
     }
     
 
-    func taskForGetRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionDataTask {
+    func taskForGetRequest(url: URL, body: Data, completion: @escaping (StudentData?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
-                DispatchQueue.main.async {
-                    completion(nil, error)
-                }
+                completion(nil, error)
+                
                 return
             }
-            let decoder = JSONDecoder()
-            do {
-                let responseObject = try decoder.decode(ResponseType.self, from: data)
-                DispatchQueue.main.async {
-                    completion(responseObject, nil)
-                }
-            } catch {
-                do {
-                    let errorResponse = try decoder.decode(SessionResponse.self, from: data) as! Error
-                    DispatchQueue.main.async {
-                        completion(nil, errorResponse)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completion(nil, error)
-                    }
-                }
-            }
+            
             let range = 5..<data.count
             let newData = data.subdata(in: range) /* subset response data! */
-            print(String(data: newData, encoding: .utf8)!)
+            //print(String(data: newData, encoding: .utf8)!)
+            let decoder = JSONDecoder()
+            do {
+                let responseObject = try decoder.decode(StudentData.self, from: newData)
+                completion(responseObject, nil)
+            } catch {
+                completion(nil, error)
+            }
         }
-        task.resume()
         
-        return task
+        task.resume()
     }
     
     
@@ -101,7 +91,12 @@ class UdacityClient {
         var xsrfCookie: HTTPCookie? = nil
         let sharedCookieStorage = HTTPCookieStorage.shared
         
-        for cookie in sharedCookieStorage.cookies! {
+        guard let cookies = sharedCookieStorage.cookies else {
+            // set completion handler here
+            return
+        }
+        
+        for cookie in cookies {
             if cookie.name == "XSRF-TOKEN" {
                 xsrfCookie = cookie
             }
@@ -148,7 +143,6 @@ class UdacityClient {
 
         taskForPostRequest(withURL: url, body: body) { response, error in
             if let response = response {
-                print(response.session?.expiration)
                 completion(response, nil)
             } else {
                 completion(nil, error)
@@ -164,6 +158,7 @@ class UdacityClient {
         taskForDeleteRequest(withURL: url) { response, error in
             if let response = response {
                 completion(response, nil)
+                // whereever you are getting a callback, you should present login screen (by changing window's root ViewController)
             } else {
                 completion(nil, error)
             }

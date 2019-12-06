@@ -17,6 +17,8 @@ class LoginViewController: UIViewController {
     
     var session: SessionResponse!
     
+    let sharedTabBarViewInstance = TabBarViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,11 +33,13 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         self.subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         self.unsubscribeToKeyboardNotifications()
     }
     
@@ -60,7 +64,6 @@ class LoginViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.loginComplete()
                         print("Login Successful!")
-                        logInStruct.loggedIn = true
                     }
                 } else if error != nil {
                     DispatchQueue.main.async {
@@ -76,9 +79,15 @@ class LoginViewController: UIViewController {
     }
     
     private func loginComplete() {
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeTab")
-        self.present(controller, animated: true, completion: nil)
+        // Make Tab Bar Controller root controller on successful login
+        if let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeTab") as? TabBarViewController {
+            UIApplication.shared.keyWindow?.rootViewController = tabBarController
+            UIApplication.shared.keyWindow?.makeKeyAndVisible()
+        }
+        
     }
+    
+    
 }
 
 extension LoginViewController: UITextFieldDelegate {

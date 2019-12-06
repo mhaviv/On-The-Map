@@ -14,4 +14,9 @@ class ListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    @IBAction func logoutPressed(_ sender: Any) {
+        logout()
+    }
+    
 }

@@ -8,17 +8,18 @@
 
 import Foundation
 
-class StudentData {
+// Should be struct when getting data
+struct StudentData: Codable {
     
-    static var objectId: String = ""
-    static var accountKey: String = ""
-    static var firstName: String = ""
-    static var lastName: String = ""
-    static var mapString: String = ""
-    static var mediaURL: String = ""
-    static var latitude: Double = 0.0
-    static var longitude: Double = 0.0
+    let objectId: String?
+    let accountKey: String?
+    let firstName: String?
+    let lastName: String?
+    let mapString: String?
+    let mediaURL: String?
+    let latitude: Double?
+    let longitude: Double?
     
-//    static var studentLocations = [ParseStudent]()
+//    let studentLocations = [ParseStudent]()
     
 }
