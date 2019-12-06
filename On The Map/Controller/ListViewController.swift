@@ -16,7 +16,7 @@ class ListViewController: UITableViewController {
     }
     
     @IBAction func logoutPressed(_ sender: Any) {
-        logout()
+        TabBarViewController.sharedInstance().logout()
     }
     
 }

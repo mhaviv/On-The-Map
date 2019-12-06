@@ -10,10 +10,15 @@ import Foundation
 import UIKit
 
 class TabBarViewController: UITabBarController {
-    
-    var sharedInstance = TabBarViewController()
-            
+                
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    class func sharedInstance() -> TabBarViewController {
+        struct Singleton {
+            static var sharedInstance = TabBarViewController()
+        }
+        return Singleton.sharedInstance
     }
 }
