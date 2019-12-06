@@ -30,7 +30,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_mapview-selected" id="wpl-vB-8PA"/>
                     <navigationItem key="navigationItem" title="On The Map" id="KtA-4K-49w">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="L6l-Bm-o8q">
+                        <barButtonItem key="leftBarButtonItem" id="L6l-Bm-o8q">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WKf-SK-VQ1">
                                 <rect key="frame" x="16" y="10" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -41,8 +41,8 @@
                             </button>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem image="icon_addpin" style="plain" id="8ri-1g-y3C"/>
-                            <barButtonItem style="plain" systemItem="refresh" id="exB-5L-c7C"/>
+                            <barButtonItem image="icon_addpin" id="8ri-1g-y3C"/>
+                            <barButtonItem systemItem="refresh" id="exB-5L-c7C"/>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -166,7 +166,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="9Oa-3Z-7XI">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="listViewTableCell" id="9Oa-3Z-7XI">
                                 <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Oa-3Z-7XI" id="gV3-vD-0QX">
@@ -182,9 +182,9 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="" image="icon_listview-selected" id="3W2-Rr-xdg"/>
                     <navigationItem key="navigationItem" title="On The Map" id="Dph-pA-exU">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="k8q-ec-uJ5">
+                        <barButtonItem key="leftBarButtonItem" id="k8q-ec-uJ5">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="g1f-P1-CYf">
-                                <rect key="frame" x="16" y="10" width="92" height="30"/>
+                                <rect key="frame" x="16" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
                             </button>
@@ -193,8 +193,8 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem image="icon_addpin" style="plain" id="8bE-lr-v5T"/>
-                            <barButtonItem style="plain" systemItem="refresh" id="hUT-bH-0xx"/>
+                            <barButtonItem image="icon_addpin" id="8bE-lr-v5T"/>
+                            <barButtonItem systemItem="refresh" id="hUT-bH-0xx"/>
                         </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
@@ -208,7 +208,7 @@
                 <navigationController id="qcp-sJ-CSX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="vOp-gb-Ton"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q8L-2D-Ao9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
