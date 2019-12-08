@@ -8,7 +8,6 @@
 
 import Foundation
 
-// Should be struct when getting data
 struct StudentData: Codable {
     
     let objectId: String?
@@ -20,6 +19,6 @@ struct StudentData: Codable {
     let latitude: Double?
     let longitude: Double?
     
-//    let studentLocations = [ParseStudent]()
+    
     
 }

@@ -13,6 +13,8 @@ import Foundation
 class UdacityClient {
     
     enum Endpoint {
+        static let userID = "user_id"
+        
         case sessionURL
         case userURL
         
@@ -21,7 +23,7 @@ class UdacityClient {
             case .sessionURL:
                 return "https://onthemap-api.udacity.com/v1/session"
             case .userURL:
-                return "https://onthemap-api.udacity.com/v1/users"
+                return "https://onthemap-api.udacity.com/v1/users/"
             }
         }
         
@@ -31,7 +33,7 @@ class UdacityClient {
     }
     
 
-    func taskForGetRequest(url: URL, body: Data, completion: @escaping (StudentData?, Error?) -> Void) {
+    func taskForGetRequest(url: URL, completion: @escaping (StudentData?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 completion(nil, error)
@@ -148,7 +150,20 @@ class UdacityClient {
                 completion(nil, error)
             }
         }
-
+    }
+    
+    func GetUserData(userId: String, completion: @escaping (_ response: StudentData?, _ error: Error?) -> Void) {
+        
+        let url = Endpoint.sessionURL.url.appendingPathComponent(Endpoint.userID.byReplacingKey(Endpoint.userID, withValue: userId))
+        
+        taskForGetRequest(url: url) { response, error in
+            if let response = response {
+                
+                completion(response, nil)
+            } else {
+                completion(nil, error)
+            }
+        }
     }
     
     func LogoutUser(completion: @escaping (_ response: Session?, _ error: Error?) -> Void) {
@@ -174,4 +189,16 @@ class UdacityClient {
         return Singleton.sharedInstance
     }
     
+}
+
+extension String {
+
+    /// Returns a string in which the key is substituted with the given value, if found.
+    /// - Parameters:
+    ///     - key: the key to be found and replaced.
+    ///     - value: the value to be used when replacing the key.
+    /// - Returns: the replaced string.
+    func byReplacingKey(_ key: String, withValue value: String) -> String {
+        return replacingOccurrences(of: "{\(key)}", with: value)
+    }
 }

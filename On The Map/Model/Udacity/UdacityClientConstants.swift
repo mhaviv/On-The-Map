@@ -11,7 +11,15 @@ import UIKit
 
 
 extension UdacityClient {
-
+    
+    struct JSONResponseKeys {
+        
+        // Public User Data
+        static let firstName = "first_name"
+        static let lastName = "last_name"
+        static let userKey = "key"
+    }
+    
 }
 
 

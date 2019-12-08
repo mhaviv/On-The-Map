@@ -15,8 +15,10 @@
 		1E28008F2399597200E38E74 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E28008E2399597200E38E74 /* TabBarViewController.swift */; };
 		CC5FE50A23948962006816AF /* StudentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FE50923948962006816AF /* StudentData.swift */; };
 		CC5FE50C239A198A006816AF /* TabBarVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FE50B239A1989006816AF /* TabBarVCHelper.swift */; };
+		CC5FE50E239DA379006816AF /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FE50D239DA378006816AF /* UserData.swift */; };
+		CC5FE512239DAE8A006816AF /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FE511239DAE8A006816AF /* ParseClient.swift */; };
 		CC99F25B2383AA0400577107 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99F25A2383AA0400577107 /* UdacityClient.swift */; };
-		CC99F26523862ABD00577107 /* UdacityClientHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99F26423862ABD00577107 /* UdacityClientHelper.swift */; };
+		CC99F26523862ABD00577107 /* UdacityClientConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99F26423862ABD00577107 /* UdacityClientConstants.swift */; };
 		CC99F26923878AFF00577107 /* SessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99F26823878AFF00577107 /* SessionResponse.swift */; };
 		CCC322B12377A7DC00A48791 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B02377A7DC00A48791 /* MapViewController.swift */; };
 		CCC322B32377A91400A48791 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B22377A91400A48791 /* ListViewController.swift */; };
@@ -55,8 +57,10 @@
 		1E28008E2399597200E38E74 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		CC5FE50923948962006816AF /* StudentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentData.swift; sourceTree = "<group>"; };
 		CC5FE50B239A1989006816AF /* TabBarVCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVCHelper.swift; sourceTree = "<group>"; };
+		CC5FE50D239DA378006816AF /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		CC5FE511239DAE8A006816AF /* ParseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		CC99F25A2383AA0400577107 /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
-		CC99F26423862ABD00577107 /* UdacityClientHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClientHelper.swift; sourceTree = "<group>"; };
+		CC99F26423862ABD00577107 /* UdacityClientConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClientConstants.swift; sourceTree = "<group>"; };
 		CC99F26823878AFF00577107 /* SessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SessionResponse.swift; path = "On The Map/Model/SessionResponse.swift"; sourceTree = SOURCE_ROOT; };
 		CCC322B02377A7DC00A48791 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CCC322B22377A91400A48791 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -130,14 +134,30 @@
 			path = Responses;
 			sourceTree = "<group>";
 		};
+		CC5FE50F239DAE4E006816AF /* Udacity */ = {
+			isa = PBXGroup;
+			children = (
+				CC99F25A2383AA0400577107 /* UdacityClient.swift */,
+				CC99F26423862ABD00577107 /* UdacityClientConstants.swift */,
+			);
+			path = Udacity;
+			sourceTree = "<group>";
+		};
+		CC5FE510239DAE67006816AF /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				CC5FE511239DAE8A006816AF /* ParseClient.swift */,
+			);
+			path = Parse;
+			sourceTree = "<group>";
+		};
 		CCC5F9BB2373D0C60054B4A2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				CCC5F9BF2373D1FC0054B4A2 /* Data */,
-				CCC5F9C22373D2330054B4A2 /* Requests */,
 				1EDF4332237B543E005BA256 /* Responses */,
-				CC99F25A2383AA0400577107 /* UdacityClient.swift */,
-				CC99F26423862ABD00577107 /* UdacityClientHelper.swift */,
+				CC5FE50F239DAE4E006816AF /* Udacity */,
+				CC5FE510239DAE67006816AF /* Parse */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,15 +175,9 @@
 			isa = PBXGroup;
 			children = (
 				CC5FE50923948962006816AF /* StudentData.swift */,
+				CC5FE50D239DA378006816AF /* UserData.swift */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		CCC5F9C22373D2330054B4A2 /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Requests;
 			sourceTree = "<group>";
 		};
 		CCC5F9C323746BA00054B4A2 /* Controller */ = {
@@ -321,11 +335,13 @@
 			files = (
 				CC99F26923878AFF00577107 /* SessionResponse.swift in Sources */,
 				CC99F25B2383AA0400577107 /* UdacityClient.swift in Sources */,
+				CC5FE50E239DA379006816AF /* UserData.swift in Sources */,
 				1E01E1A02371ED630059779E /* AppDelegate.swift in Sources */,
 				1E01E1A22371ED630059779E /* SceneDelegate.swift in Sources */,
 				1E28008F2399597200E38E74 /* TabBarViewController.swift in Sources */,
+				CC5FE512239DAE8A006816AF /* ParseClient.swift in Sources */,
 				CC5FE50C239A198A006816AF /* TabBarVCHelper.swift in Sources */,
-				CC99F26523862ABD00577107 /* UdacityClientHelper.swift in Sources */,
+				CC99F26523862ABD00577107 /* UdacityClientConstants.swift in Sources */,
 				CC5FE50A23948962006816AF /* StudentData.swift in Sources */,
 				CCC322B12377A7DC00A48791 /* MapViewController.swift in Sources */,
 				CCC322BE2377B71200A48791 /* MapLocation.swift in Sources */,
