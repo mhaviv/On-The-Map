@@ -8,19 +8,20 @@
 
 import Foundation
 
-struct StudentData: Codable {
+struct StudentData: Decodable {
+    var id: String
+    var firstName: String
+    var lastName: String
+    var longitude: Double
+    var latitude: Double
+    var mediaURL: String
     
-    let objectId: String?
-    let accountKey: String?
-    let firstName: String?
-    let lastName: String?
-    let mapString: String?
-    let mediaURL: String?
-    let latitude: Double?
-    let longitude: Double?
-    let createdAt: Date?
-    let updatedAt: Date?
-    
-    
-    
+    enum CodingKeys: String, CodingKey {
+        case id = "objectId"
+        case firstName
+        case lastName
+        case longitude
+        case latitude
+        case mediaURL
+    }
 }

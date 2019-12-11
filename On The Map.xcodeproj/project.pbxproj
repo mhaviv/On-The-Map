@@ -12,6 +12,11 @@
 		1E01E1A72371ED630059779E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E01E1A52371ED630059779E /* Main.storyboard */; };
 		1E01E1A92371ED6D0059779E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E01E1A82371ED6D0059779E /* Assets.xcassets */; };
 		1E01E1AC2371ED6E0059779E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E01E1AA2371ED6E0059779E /* LaunchScreen.storyboard */; };
+		1E03F5CC23A15BC00027C59E /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E03F5CB23A15BC00027C59E /* APIProtocol.swift */; };
+		1E03F5CE23A15BD10027C59E /* APIMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E03F5CD23A15BD10027C59E /* APIMethods.swift */; };
+		1E03F5D023A15EE60027C59E /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E03F5CF23A15EE60027C59E /* APIConstants.swift */; };
+		1E03F5D323A1A3110027C59E /* UserPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E03F5D223A1A3110027C59E /* UserPayload.swift */; };
+		1E03F5D523A1A31A0027C59E /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E03F5D423A1A31A0027C59E /* Payload.swift */; };
 		1E28008F2399597200E38E74 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E28008E2399597200E38E74 /* TabBarViewController.swift */; };
 		CC5FE50A23948962006816AF /* StudentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FE50923948962006816AF /* StudentData.swift */; };
 		CC5FE50C239A198A006816AF /* TabBarVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FE50B239A1989006816AF /* TabBarVCHelper.swift */; };
@@ -55,6 +60,11 @@
 		1E01E1AD2371ED6E0059779E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E01E1B22371ED6E0059779E /* On The MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On The MapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E01E1BD2371ED6E0059779E /* On The MapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On The MapUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E03F5CB23A15BC00027C59E /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
+		1E03F5CD23A15BD10027C59E /* APIMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMethods.swift; sourceTree = "<group>"; };
+		1E03F5CF23A15EE60027C59E /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		1E03F5D223A1A3110027C59E /* UserPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPayload.swift; sourceTree = "<group>"; };
+		1E03F5D423A1A31A0027C59E /* Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
 		1E28008E2399597200E38E74 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		CC5FE50923948962006816AF /* StudentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentData.swift; sourceTree = "<group>"; };
 		CC5FE50B239A1989006816AF /* TabBarVCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVCHelper.swift; sourceTree = "<group>"; };
@@ -128,6 +138,25 @@
 			path = "On The Map";
 			sourceTree = "<group>";
 		};
+		1E03F5CA23A15B8C0027C59E /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1E03F5CB23A15BC00027C59E /* APIProtocol.swift */,
+				1E03F5CD23A15BD10027C59E /* APIMethods.swift */,
+				1E03F5CF23A15EE60027C59E /* APIConstants.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		1E03F5D123A1A2D90027C59E /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				1E03F5D223A1A3110027C59E /* UserPayload.swift */,
+				1E03F5D423A1A31A0027C59E /* Payload.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
 		1EDF4332237B543E005BA256 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,7 +185,9 @@
 		CCC5F9BB2373D0C60054B4A2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1E03F5CA23A15B8C0027C59E /* API */,
 				CCC5F9BF2373D1FC0054B4A2 /* Data */,
+				1E03F5D123A1A2D90027C59E /* Requests */,
 				1EDF4332237B543E005BA256 /* Responses */,
 				CC5FE50F239DAE4E006816AF /* Udacity */,
 				CC5FE510239DAE67006816AF /* Parse */,
@@ -338,7 +369,10 @@
 			files = (
 				CC99F26923878AFF00577107 /* SessionResponse.swift in Sources */,
 				CC99F25B2383AA0400577107 /* UdacityClient.swift in Sources */,
+				1E03F5CC23A15BC00027C59E /* APIProtocol.swift in Sources */,
 				CC5FE50E239DA379006816AF /* UserData.swift in Sources */,
+				1E03F5CE23A15BD10027C59E /* APIMethods.swift in Sources */,
+				1E03F5D023A15EE60027C59E /* APIConstants.swift in Sources */,
 				1E01E1A02371ED630059779E /* AppDelegate.swift in Sources */,
 				1E01E1A22371ED630059779E /* SceneDelegate.swift in Sources */,
 				1E28008F2399597200E38E74 /* TabBarViewController.swift in Sources */,
@@ -346,7 +380,9 @@
 				CC5FE50C239A198A006816AF /* TabBarVCHelper.swift in Sources */,
 				CC99F26523862ABD00577107 /* UdacityClientConstants.swift in Sources */,
 				CC5FE50A23948962006816AF /* StudentData.swift in Sources */,
+				1E03F5D323A1A3110027C59E /* UserPayload.swift in Sources */,
 				CCC322B12377A7DC00A48791 /* MapViewController.swift in Sources */,
+				1E03F5D523A1A31A0027C59E /* Payload.swift in Sources */,
 				CC5FE514239E0DCF006816AF /* AddLocationViewController.swift in Sources */,
 				CCC322BE2377B71200A48791 /* MapLocation.swift in Sources */,
 				CCC322B82377AA2200A48791 /* LoginViewController.swift in Sources */,
