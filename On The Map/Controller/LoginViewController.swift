@@ -83,8 +83,7 @@ class LoginViewController: UIViewController {
         if let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeTab") as? TabBarViewController {
             UIApplication.shared.keyWindow?.rootViewController = tabBarController
             UIApplication.shared.keyWindow?.makeKeyAndVisible()
-        }
-        
+        }        
     }
     
     

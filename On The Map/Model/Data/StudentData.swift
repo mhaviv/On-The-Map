@@ -18,6 +18,8 @@ struct StudentData: Codable {
     let mediaURL: String?
     let latitude: Double?
     let longitude: Double?
+    let createdAt: Date?
+    let updatedAt: Date?
     
     
     

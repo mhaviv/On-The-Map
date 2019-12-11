@@ -7,3 +7,23 @@
 //
 
 import Foundation
+
+struct ParseClient {
+    
+    struct Endpoints {
+        static let studentLocation = "https://onthemap-api.udacity.com/v1/StudentLocation?"
+    }
+    
+    struct parameterKeys {
+        static let limit = "limit"
+        static let skip = "skip"
+        static let updatedAt = "updatedAt"
+        static let order = "order=-"
+        static let uniqueKey = "uniqueKey"
+        static let uniqueKeyString = "uniqueKey=\(uniqueKey)"
+    }
+    
+    
+    
+    
+}

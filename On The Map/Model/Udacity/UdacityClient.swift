@@ -158,7 +158,7 @@ class UdacityClient {
         
         taskForGetRequest(url: url) { response, error in
             if let response = response {
-                
+                print(userId)
                 completion(response, nil)
             } else {
                 completion(nil, error)
