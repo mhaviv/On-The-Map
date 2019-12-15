@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Payload: Codable {
+// Payload sent to Udacity API to retrieve Session Response
+struct UdacityPayload: Codable {
     var payload: UserPayload
     
     enum CodingKeys: String, CodingKey {

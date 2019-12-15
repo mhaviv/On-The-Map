@@ -32,7 +32,7 @@
                     <navigationItem key="navigationItem" title="On The Map" id="KtA-4K-49w">
                         <barButtonItem key="leftBarButtonItem" id="L6l-Bm-o8q">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WKf-SK-VQ1">
-                                <rect key="frame" x="16" y="10" width="92" height="30"/>
+                                <rect key="frame" x="16" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
@@ -153,7 +153,7 @@
                         <viewLayoutGuide key="safeArea" id="ksh-ox-Hh5"/>
                     </view>
                     <connections>
-                        <outlet property="emailTextField" destination="rIR-zB-vhQ" id="eDk-GT-cbC"/>
+                        <outlet property="emailTextField" destination="rIR-zB-vhQ" id="OZj-69-1Zc"/>
                         <outlet property="loginButton" destination="hvW-DW-2IS" id="B9f-9T-Wx7"/>
                         <outlet property="passwordTextField" destination="ICl-vG-AEK" id="yvJ-xv-mkK"/>
                     </connections>

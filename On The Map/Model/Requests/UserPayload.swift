@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Payload sent to UdacityPayload to help retrieve Session Response
 struct UserPayload: Codable {
     var username: String
     var password: String

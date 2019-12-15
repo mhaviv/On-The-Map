@@ -8,22 +8,36 @@
 
 import Foundation
 
-struct ParseClient {
+class ParseClient {
     
-    struct Endpoints {
-        static let studentLocation = "https://onthemap-api.udacity.com/v1/StudentLocation?"
+    public func getLocations(completion: ((_ locations: [StudentData]?) -> ())?) {
+        APIManager.sharedInstance().getRequest(endpoint: .location(limit:100)) { (data, response, error) in
+            guard error == nil, let data = data else {
+                completion?(nil)
+                return
+            }
+            
+            do {
+                let result:ParseResponse = try JSONDecoder().decode(ParseResponse<StudentData>.self, from: data)
+                completion?(result.results)
+            } catch {
+                print("")
+                completion?(nil)
+            }
+            
+        }
     }
     
-    struct parameterKeys {
-        static let limit = "limit"
-        static let skip = "skip"
-        static let updatedAt = "updatedAt"
-        static let order = "order=-"
-        static let uniqueKey = "uniqueKey"
-        static let uniqueKeyString = "uniqueKey=\(uniqueKey)"
-    }
-    
-    
-    
-    
+//    ParseClient().getLocations { (results) in
+//        guard let locations = results else {
+//            print("nothing")
+//            return
+//        }
+//        
+//        let c = locations.map { (user) -> (Double, Double) in
+//            return (user.latitude, user.longitude)
+//        }
+//        print(c)
+//    }
+
 }

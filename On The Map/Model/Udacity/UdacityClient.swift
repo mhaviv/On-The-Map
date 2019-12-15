@@ -12,89 +12,81 @@ import Foundation
 
 class UdacityClient {
     
-    enum Endpoint {
-        static let userID = "user_id"
-        
-        case sessionURL
-        case userURL
-        
-        var stringValue: String {
-            switch self {
-            case .sessionURL:
-                return "https://onthemap-api.udacity.com/v1/session"
-            case .userURL:
-                return "https://onthemap-api.udacity.com/v1/users/"
-            }
-        }
-        
-        var url: URL {
-            return URL(string: self.stringValue)!
-        }
-    }
-    
+    public func AuthenticateUser(username: String, password: String, completion: @escaping (_ response: SessionResponse?, _ error: Error?) -> Void) {
 
-    func taskForGetRequest(url: URL, completion: @escaping (StudentData?, Error?) -> Void) {
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else {
-                completion(nil, error)
+        
+        let encoder = JSONEncoder()
+        
+        let userPayload = UserPayload(username: username, password: password)
+        let payload = UdacityPayload(payload: userPayload)
+
+        do {
+            let encodedData = try encoder.encode(payload)
+            //send off to network
+            //UdacityClient().AuthenticateUser(username: username, password: password, data: data)
+            APIManager.sharedInstance().postRequest(endpoint: APIConstants.Endpoint.session, data: encodedData) { (dataResp, response, error) in
+               guard let data = dataResp else {
+                   print(error?.localizedDescription)
+                   completion(nil, error)
+                   
+                   return
+               }
                 
-                return
-            }
-            
-            let range = 5..<data.count
-            let newData = data.subdata(in: range) /* subset response data! */
-            //print(String(data: newData, encoding: .utf8)!)
-            let decoder = JSONDecoder()
-            do {
-                let responseObject = try decoder.decode(StudentData.self, from: newData)
-                completion(responseObject, nil)
-            } catch {
-                completion(nil, error)
-            }
+                // need to check 403
+               // if response.
+               
+               let range = 5..<data.count
+               let newData = data.subdata(in: range)
+               print(String(data: newData, encoding: .utf8) ?? "no data")
+                
+                let decoder = JSONDecoder()
+                
+                do {
+                    let responseObject = try decoder.decode(SessionResponse.self, from: newData)
+                    
+                    completion(responseObject, nil)
+                } catch {
+                    completion(nil, error)
+                }
+           }
+        } catch {
+            print(error.localizedDescription)
+            completion(nil, error)
         }
         
-        task.resume()
+       
     }
     
-    
-    func taskForPostRequest(withURL url: URL, body: Data, completion: @escaping (SessionResponse?, Error?) -> Void) {
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        // We cannot encode the body before its converted to raw data
-        request.httpBody = body
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                completion(nil, error)
-                
-                return
-            }
-            
-            let range = 5..<data.count
-            let newData = data.subdata(in: range) /* subset response data! */
-            print(String(data: newData, encoding: .utf8)!)
+    public func LogoutUser(completion: @escaping (_ response: Session?, _ error: Error?) -> Void) {
         
-            let decoder = JSONDecoder()
-            do {
-                // decode is taking data, converting it into raw data and then parsing it into JSON
-                let responseObject = try decoder.decode(SessionResponse.self, from: newData)
-                completion(responseObject, nil)
-            } catch {
-                completion(nil, error)
-            }
-        }
-        task.resume()
-    }
-    
-    func taskForDeleteRequest(withURL url: URL, completion: @escaping (Session?, Error?) -> Void) {
-        var request = URLRequest(url: url)
-        request.httpMethod = "DELETE"
+//        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
+//        request.httpMethod = "DELETE"
+//        var xsrfCookie: HTTPCookie? = nil
+//        let sharedCookieStorage = HTTPCookieStorage.shared
+//        for cookie in sharedCookieStorage.cookies! {
+//          if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+//        }
+        
+//        if let xsrfCookie = xsrfCookie {
+//          request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+//        }
+//        let session = URLSession.shared
+//        let task = session.dataTask(with: request) { data, response, error in
+//          if error != nil { // Handle error…
+//              return
+//          }
+//          let range = Range(5..<data!.count)
+//          let newData = data?.subdata(in: range) /* subset response data! */
+//          print(String(data: newData!, encoding: .utf8)!)
+//        }
+//        task.resume()
+        
         var xsrfCookie: HTTPCookie? = nil
         let sharedCookieStorage = HTTPCookieStorage.shared
         
         guard let cookies = sharedCookieStorage.cookies else {
-            // set completion handler here
+            completion(nil, NSError(domain: "Logout Delete API", code: 1001, userInfo: ["underlyingError": "Cookie Not Found"]))
+                       
             return
         }
         
@@ -105,92 +97,100 @@ class UdacityClient {
         }
         
         if let xsrfCookie = xsrfCookie {
-            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
-        }
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                completion(nil, error)
-                return
-
-            }
-            
-            if error != nil {
-                completion(nil, error)
+//            let requestURLString = APIConstants.Endpoint.session.url()
+//            var request = URLRequest(url: URL(string: requestURLString)!)
+//            request.httpMethod = "DELETE"
+//            print("Here is request: \(request)")
+//            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+            APIManager.sharedInstance().deleteRequest(endpoint: APIConstants.Endpoint.session, cookie: xsrfCookie) { (dataResp, response, error) in
+                guard let data = dataResp else {
+                    print(error?.localizedDescription)
+                    completion(nil, error)
+                    
+                    return
+                }
                 
-                return
+                let range = 5..<data.count
+                let newData = data.subdata(in: range)
+                print(String(data: newData, encoding: .utf8) ?? "no data")
+                
+                let decoder = JSONDecoder()
+                
+                do {
+                    let responseObject = try decoder.decode(Session.self, from: newData)
+                    
+                    completion(responseObject, nil)
+                } catch {
+                    completion(nil, error)
+                }
             }
-            
-            let range = 5..<data.count
-            let newData = data.subdata(in: range) /* subset response data! */
-            print(String(data: newData, encoding: .utf8)!)
-            
-            let decoder = JSONDecoder()
-            
-            do {
-                let responseObject = try decoder.decode(Session.self, from: newData)
-                completion(responseObject, nil)
-            } catch {
-                completion(nil, error)
-            }
-        }
-        task.resume()
-    }
-        
-    func AuthenticateUser(username: String, password: String, _ completion: @escaping (_ response: SessionResponse?, _ error: Error?) -> Void) {
-
-        let url = Endpoint.sessionURL.url
-
-        let body = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: .utf8)!
-
-        taskForPostRequest(withURL: url, body: body) { response, error in
-            if let response = response {
-                completion(response, nil)
-            } else {
-                completion(nil, error)
-            }
+        } else {
+            completion(nil, NSError(domain: "Logout Delete API", code: 1002, userInfo: ["underlyingError": "xsrfCookie is nil"]))
         }
     }
     
-    func GetUserData(userId: String, completion: @escaping (_ response: StudentData?, _ error: Error?) -> Void) {
-        
-        let url = Endpoint.sessionURL.url.appendingPathComponent(Endpoint.userID.byReplacingKey(Endpoint.userID, withValue: userId))
-        
-        taskForGetRequest(url: url) { response, error in
-            if let response = response {
-                print(userId)
-                completion(response, nil)
-            } else {
-                completion(nil, error)
-            }
-        }
-    }
     
-    func LogoutUser(completion: @escaping (_ response: Session?, _ error: Error?) -> Void) {
-        
-        let url = Endpoint.sessionURL.url
-        
-        taskForDeleteRequest(withURL: url) { response, error in
-            if let response = response {
-                completion(response, nil)
-                // whereever you are getting a callback, you should present login screen (by changing window's root ViewController)
-            } else {
-                completion(nil, error)
-            }
-            
-        }
-        
-    }
-    
-   class func sharedInstance() -> UdacityClient {
+    class func sharedInstance() -> UdacityClient {
         struct Singleton {
             static var sharedInstance = UdacityClient()
         }
         return Singleton.sharedInstance
     }
-    
 }
-
+//    func taskForDeleteRequest(withURL url: URL, completion: @escaping (Session?, Error?) -> Void) {
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "DELETE"
+//        var xsrfCookie: HTTPCookie? = nil
+//        let sharedCookieStorage = HTTPCookieStorage.shared
+//
+//        guard let cookies = sharedCookieStorage.cookies else {
+//            // set completion handler here
+//            return
+//        }
+//
+//        for cookie in cookies {
+//            if cookie.name == "XSRF-TOKEN" {
+//                xsrfCookie = cookie
+//            }
+//        }
+//
+//        if let xsrfCookie = xsrfCookie {
+//            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+//        }
+//
+//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard let data = data else {
+//                completion(nil, error)
+//                return
+//
+//            }
+//
+//            if error != nil {
+//                completion(nil, error)
+//
+//                return
+//            }
+//
+//            let range = 5..<data.count
+//            let newData = data.subdata(in: range) /* subset response data! */
+//            print(String(data: newData, encoding: .utf8)!)
+//
+//            let decoder = JSONDecoder()
+//
+//            do {
+//                let responseObject = try decoder.decode(Session.self, from: newData)
+//                completion(responseObject, nil)
+//            } catch {
+//                completion(nil, error)
+//            }
+//        }
+//        task.resume()
+//    }
+//
+//
+//
+//
+   
 extension String {
 
     /// Returns a string in which the key is substituted with the given value, if found.

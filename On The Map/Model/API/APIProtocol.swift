@@ -11,12 +11,13 @@ import UIKit
 
 protocol API: class {
     
-    static func request(data: Data?, urlString: String, type: RequestType) -> URLRequest?
+    static func request(data: Data?, urlString: String, type: APIConstants.RequestType) -> URLRequest?
     
-    func getRequest(endpoint: Endpoint, data: Data?, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ())
+    func getRequest(endpoint: APIConstants.Endpoint, data: Data?, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ())
     
-    func postRequest(endpoint: Endpoint, data: Data?, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ())
+    func postRequest(endpoint: APIConstants.Endpoint, data: Data?, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ())
     
-    func deleteRequest(endpoint: Endpoint, data: Data?, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ())
+    //func deleteRequest(request: URLRequest, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ())
+    func deleteRequest(endpoint: APIConstants.Endpoint, cookie: HTTPCookie, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ())
 
 }

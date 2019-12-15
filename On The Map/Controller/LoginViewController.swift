@@ -26,8 +26,8 @@ class LoginViewController: UIViewController {
         loginButton.layer.borderWidth = 1
         loginButton.layer.borderColor = UIColor.clear.cgColor
         
-//        emailTextField.delegate = self
-//        passwordTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
 
     }
     
@@ -52,13 +52,14 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginPressed(_ sender: Any) {
-        
-        if emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
+        let email = emailTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        if email.isEmpty || password.isEmpty {
             displayAlert(title: "Login Unsuccessful", message: "Username or Password is empty")
         } else {
-            UdacityClient.sharedInstance().AuthenticateUser(username: emailTextField.text!, password: passwordTextField.text!) { (response, error) in
+            UdacityClient.sharedInstance().AuthenticateUser(username: email, password: password) { (response, error) in
                 
-                if let sessionResponse = response  {
+                if let sessionResponse = response {
                     self.session = sessionResponse
                     // Use main thread to update UI changes
                     DispatchQueue.main.async {

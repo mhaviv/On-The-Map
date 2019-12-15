@@ -15,20 +15,20 @@ struct UserData: Codable {
     let lastName: String?
     let key: String?
     
-    init?(userData: [String: AnyObject]) {
-        guard let firstName = userData[UdacityClient.JSONResponseKeys.firstName] as? String,
-            let lastName = userData[UdacityClient.JSONResponseKeys.lastName] as? String
-        else {
-            return nil
-        }
-        
-        self.firstName = firstName
-        self.lastName = lastName
-        
-        guard let key = userData[UdacityClient.JSONResponseKeys.userKey] as? String else {
-            return nil
-        }
-        
-        self.key = key
-    }
+//    init?(userData: [String: AnyObject]) {
+//        guard let firstName = userData[UdacityClient.JSONResponseKeys.firstName] as? String,
+//            let lastName = userData[UdacityClient.JSONResponseKeys.lastName] as? String
+//        else {
+//            return nil
+//        }
+//        
+//        self.firstName = firstName
+//        self.lastName = lastName
+//        
+//        guard let key = userData[UdacityClient.JSONResponseKeys.userKey] as? String else {
+//            return nil
+//        }
+//        
+//        self.key = key
+//    }
 }
