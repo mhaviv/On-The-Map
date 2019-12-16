@@ -41,7 +41,7 @@ class APIManager: API {
     
     
     //MARK: GET Request Method
-    func getRequest(endpoint: APIConstants.Endpoint, data: Data? = nil, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ()) {
+    func getRequest(endpoint: APIConstants.Endpoint, data: Data? = nil, completion: @escaping(Data?, URLResponse?, Error?) -> ()) {
         guard let request = Self.request(data: data, urlString: endpoint.url(), type: .GET) else {
             completion(nil, nil, nil)
             
@@ -54,7 +54,7 @@ class APIManager: API {
     }
     
     //MARK: POST Request Method
-    func postRequest(endpoint: APIConstants.Endpoint, data: Data? = nil, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ()) {
+    func postRequest(endpoint: APIConstants.Endpoint, data: Data? = nil, completion: @escaping(Data?, URLResponse?, Error?) -> ()) {
         guard let request = Self.request(data: data, urlString: endpoint.url(), type: .POST) else {
             completion(nil, nil, nil)
             
@@ -66,7 +66,7 @@ class APIManager: API {
         }.resume()
     }
     
-    
+    //MARK: Delete Request Method
     func deleteRequest(endpoint: APIConstants.Endpoint, cookie: HTTPCookie, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         guard var request = Self.request(data: nil, urlString: endpoint.url(), type: .DELETE) else {
             completion(nil, nil, nil)
@@ -76,19 +76,8 @@ class APIManager: API {
         
         request.setValue(cookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         
-        func deleteRequest(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-            URLSession.shared.dataTask(with: request) { (dataResp, response, error) in
-                completion(dataResp, response, error)
-            }.resume()
-        }
+        URLSession.shared.dataTask(with: request) { (dataResp, response, error) in
+            completion(dataResp, response, error)
+        }.resume()
     }
-    
-    //MARK: Delete Request Method
-//    func deleteRequest(request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-//        URLSession.shared.dataTask(with: request) { (dataResp, response, error) in
-//            completion(dataResp, response, error)
-//        }.resume()
-//    }
-    
-    // Here it can have all the methods in UdacityClient
 }

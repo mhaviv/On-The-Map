@@ -67,14 +67,15 @@ class LoginViewController: UIViewController {
                         print("Login Successful!")
                     }
                 } else if error != nil {
-                    DispatchQueue.main.async {
-                        self.displayAlert(title: "Login Unsuccessful", message: "\(error!.localizedDescription)")
+                    if let errorCode = (error as NSError?)?.code, errorCode == 403 {
+                        DispatchQueue.main.async {
+                            self.displayAlert(title: "Login Unsuccessful", message: "Invalid Username and/or Password")
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.displayAlert(title: "Login Unsuccessful", message: "\(error?.localizedDescription)")
+                        }
                     }
-                } else {
-                    DispatchQueue.main.async {
-                        self.displayAlert(title: "Login Unsuccessful", message: "Invalid Username and/or Password")
-                    }
-                }
             }
         }
     }
