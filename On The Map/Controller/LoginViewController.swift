@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,8 +76,10 @@ class LoginViewController: UIViewController {
                             self.displayAlert(title: "Login Unsuccessful", message: "\(error?.localizedDescription)")
                         }
                     }
+                }
             }
         }
+        
     }
     
     private func loginComplete() {
@@ -85,11 +87,12 @@ class LoginViewController: UIViewController {
         if let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeTab") as? TabBarViewController {
             UIApplication.shared.keyWindow?.rootViewController = tabBarController
             UIApplication.shared.keyWindow?.makeKeyAndVisible()
-        }        
+        }
     }
     
     
 }
+
 
 extension LoginViewController: UITextFieldDelegate {
     
