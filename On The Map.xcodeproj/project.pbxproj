@@ -30,7 +30,7 @@
 		CCC322B32377A91400A48791 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B22377A91400A48791 /* ListViewController.swift */; };
 		CCC322B82377AA2200A48791 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B72377AA2200A48791 /* LoginViewController.swift */; };
 		CCC322BA2377AC6A00A48791 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B92377AC6A00A48791 /* ListCell.swift */; };
-		CCC322BE2377B71200A48791 /* MapLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322BD2377B71200A48791 /* MapLocation.swift */; };
+		CCC322BE2377B71200A48791 /* StudentAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322BD2377B71200A48791 /* StudentAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +78,7 @@
 		CCC322B22377A91400A48791 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		CCC322B72377AA2200A48791 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CCC322B92377AC6A00A48791 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
-		CCC322BD2377B71200A48791 /* MapLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocation.swift; sourceTree = "<group>"; };
+		CCC322BD2377B71200A48791 /* StudentAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +162,7 @@
 			children = (
 				CC99F26823878AFF00577107 /* SessionResponse.swift */,
 				CC5FE51523A1F87C006816AF /* ParseResponse.swift */,
+				CCC322BD2377B71200A48791 /* StudentAnnotation.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -217,9 +218,8 @@
 			isa = PBXGroup;
 			children = (
 				CCC322B72377AA2200A48791 /* LoginViewController.swift */,
-				CCC322BD2377B71200A48791 /* MapLocation.swift */,
-				CCC322B02377A7DC00A48791 /* MapViewController.swift */,
 				CCC322B22377A91400A48791 /* ListViewController.swift */,
+				CCC322B02377A7DC00A48791 /* MapViewController.swift */,
 				CCC322B92377AC6A00A48791 /* ListCell.swift */,
 				1E28008E2399597200E38E74 /* TabBarViewController.swift */,
 				CC5FE50B239A1989006816AF /* TabBarVCHelper.swift */,
@@ -384,7 +384,7 @@
 				CCC322B12377A7DC00A48791 /* MapViewController.swift in Sources */,
 				1E03F5D523A1A31A0027C59E /* UdacityPayload.swift in Sources */,
 				CC5FE514239E0DCF006816AF /* AddLocationViewController.swift in Sources */,
-				CCC322BE2377B71200A48791 /* MapLocation.swift in Sources */,
+				CCC322BE2377B71200A48791 /* StudentAnnotation.swift in Sources */,
 				CCC322B82377AA2200A48791 /* LoginViewController.swift in Sources */,
 				CCC322BA2377AC6A00A48791 /* ListCell.swift in Sources */,
 				CCC322B32377A91400A48791 /* ListViewController.swift in Sources */,

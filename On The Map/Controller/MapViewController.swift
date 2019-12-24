@@ -14,50 +14,52 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    var locations: [MapLocation] = []
+    var locations: [StudentAnnotation] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // set initial location in NYC
-        let initialLocation = CLLocation(latitude: 40.7829, longitude: -73.9654)
-        centerMapOnLocation(location: initialLocation)
         
         mapView.delegate = self
         
-        loadInitialData()
-        mapView.addAnnotations(locations)
+        setInitialMapLocation()
+        getUserData()
+    }
+    
+    func setInitialMapLocation() {
+        let regionRadius: CLLocationDistance = 10000
+        func centerMapOnLocation(location: CLLocation) {
+            let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
+                                                      latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+            mapView.setRegion(coordinateRegion, animated: true)
+        }
+        // set initial location in NYC
+        let initialLocation = CLLocation(latitude: 40.7829, longitude: -73.9654)
+        centerMapOnLocation(location: initialLocation)
+    }
+    
+    
+    func getUserData() {
+        ParseClient().getLocations { (results) in
+          guard let studentInfo = results else {
+              print("No Results from Parse API")
+            
+              return
+          }
         
-        /*
-        // Annotation Example
-        let mapPin = MapLocation(locationName: "Loeb Boathouse Restaurant",
-                                 coordinate: CLLocationCoordinate2D(latitude: 40.7752771, longitude: -73.9687257),
-                                 website: "http:www.thecentralparkboathouse.com")
-        // Add Annotation
-        mapView.addAnnotation(mapPin)
-        */
+          let mappedLocations = studentInfo.map { (user) -> (StudentAnnotation) in
+            //return (user.firstName, user.lastName, user.locationName, user.latitude, user.longitude, user.mediaURL)
+            return StudentAnnotation(with: CLLocationCoordinate2D(latitude: user.latitude, longitude: user.longitude), locationName: user.locationName, mediaURL: user.mediaURL)
+          }
+            
+          self.locations = mappedLocations
+            
+            self.displayLocations()
+        
+      }
     }
     
-    let regionRadius: CLLocationDistance = 10000
-    func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
-                                                  latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-      mapView.setRegion(coordinateRegion, animated: true)
-    }
-    
-    func loadInitialData() {
-      // 1
-      guard let fileName = Bundle.main.path(forResource: "MOCK_DATA", ofType: "json")
-        else { return }
-      let optionalData = try? Data(contentsOf: URL(fileURLWithPath: fileName))
-
-      guard
-        let data = optionalData,
-        let json = try? JSONSerialization.jsonObject(with: data),
-        let dictionary = json as? [String: Any],
-        let works = dictionary["data"] as? [[Any]]
-        else { return }
-        let validWorks = works.compactMap { MapLocation(json: $0) }
-      locations.append(contentsOf: validWorks)
+    func displayLocations() {
+        mapView.addAnnotations(locations)
     }
     
     @IBAction func logoutPressed(_ sender: Any) {
@@ -67,15 +69,9 @@ class MapViewController: UIViewController {
     
 }
 
-// Present visual indicator when tapping map pin
 extension MapViewController: MKMapViewDelegate {
     
-    // Gets called for every annotation you add to the map
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        // Verify it only displays annotations for user location
-//        guard let annotation = annotation as? Location else { return nil }
-        
         let identifier = "marker"
         var view: MKMarkerAnnotationView
         
@@ -91,6 +87,18 @@ extension MapViewController: MKMapViewDelegate {
             view.calloutOffset = CGPoint(x: -5, y:5)
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
+        
         return view
     }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.shared
+            
+            if let studentAnnotation = (view.annotation as? StudentAnnotation), let mediaURL = URL(string: studentAnnotation.mediaURL) {
+                app.open(mediaURL, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
 }
