@@ -18,6 +18,7 @@
 		1E03F5D323A1A3110027C59E /* UserPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E03F5D223A1A3110027C59E /* UserPayload.swift */; };
 		1E03F5D523A1A31A0027C59E /* UdacityPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E03F5D423A1A31A0027C59E /* UdacityPayload.swift */; };
 		1E28008F2399597200E38E74 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E28008E2399597200E38E74 /* TabBarViewController.swift */; };
+		1EA5E95A23B556BA00CA5224 /* StudentTableViewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5E95923B556BA00CA5224 /* StudentTableViewObject.swift */; };
 		CC5FE50A23948962006816AF /* StudentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FE50923948962006816AF /* StudentData.swift */; };
 		CC5FE50C239A198A006816AF /* TabBarVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FE50B239A1989006816AF /* TabBarVCHelper.swift */; };
 		CC5FE50E239DA379006816AF /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FE50D239DA378006816AF /* UserData.swift */; };
@@ -66,6 +67,7 @@
 		1E03F5D223A1A3110027C59E /* UserPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPayload.swift; sourceTree = "<group>"; };
 		1E03F5D423A1A31A0027C59E /* UdacityPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityPayload.swift; sourceTree = "<group>"; };
 		1E28008E2399597200E38E74 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		1EA5E95923B556BA00CA5224 /* StudentTableViewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTableViewObject.swift; sourceTree = "<group>"; };
 		CC5FE50923948962006816AF /* StudentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentData.swift; sourceTree = "<group>"; };
 		CC5FE50B239A1989006816AF /* TabBarVCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVCHelper.swift; sourceTree = "<group>"; };
 		CC5FE50D239DA378006816AF /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				CC99F26823878AFF00577107 /* SessionResponse.swift */,
 				CC5FE51523A1F87C006816AF /* ParseResponse.swift */,
 				CCC322BD2377B71200A48791 /* StudentAnnotation.swift */,
+				1EA5E95923B556BA00CA5224 /* StudentTableViewObject.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -219,8 +222,8 @@
 			children = (
 				CCC322B72377AA2200A48791 /* LoginViewController.swift */,
 				CCC322B22377A91400A48791 /* ListViewController.swift */,
-				CCC322B02377A7DC00A48791 /* MapViewController.swift */,
 				CCC322B92377AC6A00A48791 /* ListCell.swift */,
+				CCC322B02377A7DC00A48791 /* MapViewController.swift */,
 				1E28008E2399597200E38E74 /* TabBarViewController.swift */,
 				CC5FE50B239A1989006816AF /* TabBarVCHelper.swift */,
 				CC5FE513239E0DCF006816AF /* AddLocationViewController.swift */,
@@ -381,6 +384,7 @@
 				CC5FE50C239A198A006816AF /* TabBarVCHelper.swift in Sources */,
 				CC5FE50A23948962006816AF /* StudentData.swift in Sources */,
 				1E03F5D323A1A3110027C59E /* UserPayload.swift in Sources */,
+				1EA5E95A23B556BA00CA5224 /* StudentTableViewObject.swift in Sources */,
 				CCC322B12377A7DC00A48791 /* MapViewController.swift in Sources */,
 				1E03F5D523A1A31A0027C59E /* UdacityPayload.swift in Sources */,
 				CC5FE514239E0DCF006816AF /* AddLocationViewController.swift in Sources */,

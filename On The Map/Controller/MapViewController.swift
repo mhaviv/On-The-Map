@@ -26,7 +26,7 @@ class MapViewController: UIViewController {
     }
     
     func setInitialMapLocation() {
-        let regionRadius: CLLocationDistance = 10000
+        let regionRadius: CLLocationDistance = 200000
         func centerMapOnLocation(location: CLLocation) {
             let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
                                                       latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
@@ -45,14 +45,28 @@ class MapViewController: UIViewController {
             
               return
           }
-        
-          let mappedLocations = studentInfo.map { (user) -> (StudentAnnotation) in
-            //return (user.firstName, user.lastName, user.locationName, user.latitude, user.longitude, user.mediaURL)
+            
+            // Maps student data and filters nil values with compactMap
+            let mappedLocations = studentInfo.compactMap() { (user) -> (StudentAnnotation) in
+            
             return StudentAnnotation(with: CLLocationCoordinate2D(latitude: user.latitude, longitude: user.longitude), locationName: user.locationName, mediaURL: user.mediaURL)
-          }
             
-          self.locations = mappedLocations
-            
+//                mappedLocations.filter() {
+//                    let pattern = #"^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$"#
+//                    let regex = try NSRegularExpression(pattern: pattern, options: [])
+//                    if mappedLocations.t != regex {
+//
+//                        return
+//                    } else {
+//                        print("Title Passes: \(student)")
+//                        locations.append(<#T##newElement: StudentAnnotation##StudentAnnotation#>)
+//                    }
+//                }
+        
+            }
+                        
+            self.locations = mappedLocations
+                        
             self.displayLocations()
         
       }
