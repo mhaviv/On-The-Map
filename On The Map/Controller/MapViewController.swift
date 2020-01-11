@@ -66,6 +66,7 @@ class MapViewController: UIViewController {
             }
                         
             self.locations = mappedLocations
+            print("locations retrieved")
                         
             self.displayLocations()
         
@@ -74,6 +75,7 @@ class MapViewController: UIViewController {
     
     func displayLocations() {
         mapView.addAnnotations(locations)
+        print("locations rendered to map")
     }
     
     @IBAction func logoutPressed(_ sender: Any) {

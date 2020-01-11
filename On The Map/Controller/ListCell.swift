@@ -11,4 +11,9 @@ import UIKit
 
 class ListCell: UITableViewCell {
     
+    @IBOutlet weak var cellImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var urlLabel: UILabel!
+    
+    
 }
