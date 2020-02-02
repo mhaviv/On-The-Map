@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qEd-Z6-j7J">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qEd-Z6-j7J">
     <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,7 +32,7 @@
                     <navigationItem key="navigationItem" title="On The Map" id="KtA-4K-49w">
                         <barButtonItem key="leftBarButtonItem" id="L6l-Bm-o8q">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WKf-SK-VQ1">
-                                <rect key="frame" x="16" y="10" width="92" height="30"/>
+                                <rect key="frame" x="16" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
@@ -124,17 +124,30 @@
                                                 </constraints>
                                                 <viewLayoutGuide key="safeArea" id="UFG-SP-UXQ"/>
                                             </stackView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Don't have an account? Sign Up" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3xE-HD-xSW">
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="mUd-au-iKu">
                                                 <rect key="frame" x="0.0" y="128" width="206" height="18.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Don't have an account?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3xE-HD-xSW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="152" height="18.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="63S-8k-MJB" userLabel="Sign Up Link">
+                                                        <rect key="frame" x="155" y="0.0" width="51" height="18.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <state key="normal" title="Sign Up"/>
+                                                        <connections>
+                                                            <action selector="takeUserToSignUp:" destination="qEd-Z6-j7J" eventType="touchUpInside" id="Iyr-nB-zjU"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                             <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="512-Ze-Std" userLabel="Spacer">
                                                 <rect key="frame" x="0.0" y="166.5" width="206" height="4"/>
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="3xE-HD-xSW" firstAttribute="top" secondItem="FgJ-mI-l1a" secondAttribute="bottom" constant="20" id="4Lh-OL-vO2"/>
+                                            <constraint firstItem="mUd-au-iKu" firstAttribute="top" secondItem="FgJ-mI-l1a" secondAttribute="bottom" constant="20" id="hcg-ne-Fxp"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -156,6 +169,7 @@
                         <outlet property="emailTextField" destination="rIR-zB-vhQ" id="OZj-69-1Zc"/>
                         <outlet property="loginButton" destination="hvW-DW-2IS" id="B9f-9T-Wx7"/>
                         <outlet property="passwordTextField" destination="ICl-vG-AEK" id="yvJ-xv-mkK"/>
+                        <outlet property="signUpButton" destination="63S-8k-MJB" id="ApH-0m-FWp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dWJ-dh-Lab" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

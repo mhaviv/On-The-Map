@@ -8,13 +8,15 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    
+    @IBOutlet weak var signUpButton: UIButton!
+        
     var session: SessionResponse!
     
     let sharedTabBarViewInstance = TabBarViewController()
@@ -28,7 +30,7 @@ class LoginViewController: UIViewController {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        
+                
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,6 +92,14 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBAction func takeUserToSignUp(_ sender: Any) {
+        
+        /* Open Udacity Sign Up URL */
+        if let url = URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated") {
+            let svc = SFSafariViewController(url: url)
+            self.present(svc, animated: true, completion: nil)
+        }
+    }
     
 }
 
