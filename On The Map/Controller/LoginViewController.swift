@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import SafariServices
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController, UINavigationControllerDelegate {
     
@@ -16,7 +18,11 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
-        
+    @IBOutlet weak var udacityLogo: UIImageView!
+    @IBOutlet weak var facebookLoginButton: UIButton!
+    @IBOutlet weak var gmailLoginButton: UIButton!
+    @IBOutlet weak var dontHaveAnAccountLabel: UILabel!
+    
     var session: SessionResponse!
     
     let sharedTabBarViewInstance = TabBarViewController()
@@ -30,7 +36,12 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
-                
+        
+        udacityLogoStyling()
+        facebookButtonStyling()
+        gmailButtonStyling()
+        
+        dontHaveAnAccountLabel.adjustsFontSizeToFitWidth = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +95,8 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         
     }
     
+    
+    
     private func loginComplete() {
         // Make Tab Bar Controller root controller on successful login
         if let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeTab") as? TabBarViewController {
@@ -92,13 +105,73 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
     
-    @IBAction func takeUserToSignUp(_ sender: Any) {
+    @IBAction func signUpPressed(_ sender: Any) {
         
         /* Open Udacity Sign Up URL */
         if let url = URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated") {
             let svc = SFSafariViewController(url: url)
             self.present(svc, animated: true, completion: nil)
         }
+    }
+    
+    func udacityLogoStyling() {
+        let imageViewWidthConstraint = NSLayoutConstraint(item: udacityLogo, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80)
+        let imageViewHeightConstraint = NSLayoutConstraint(item: udacityLogo, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80)
+        udacityLogo.addConstraints([imageViewWidthConstraint, imageViewHeightConstraint])
+    }
+    
+    func facebookButtonStyling() {
+        let facebookLogo = UIImage(named: "facebookLogo.png")
+        facebookLoginButton.setTitle("Sign in with Facebook", for: .normal)
+        facebookLoginButton.setImage(facebookLogo, for: .normal)
+        facebookLoginButton.semanticContentAttribute = .forceLeftToRight
+        facebookLoginButton.setTitleColor(.white, for: .normal)
+        facebookLoginButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        facebookLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        facebookLoginButton.imageView?.contentMode = .scaleAspectFit
+        facebookLoginButton.imageEdgeInsets = UIEdgeInsets(top: 3, left: 0, bottom: 5, right: 200)
+        facebookLoginButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        facebookLoginButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        self.facebookLoginButton.titleLabel?.adjustsFontSizeToFitWidth = true;
+        
+
+        facebookLoginButton.layer.cornerRadius = 5
+    }
+    
+    @IBAction func loginWithFacebook(_ sender: Any) {
+        let manager = LoginManager()
+        manager.logIn(permissions: [.publicProfile, .email], viewController: self) { (result) in
+            switch result {
+            case .cancelled:
+                print("Facebook login cancelled")
+                break
+            case .failed(let error):
+                print("Facebook login failed: \(error.localizedDescription)")
+                break
+            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+                print("Access token == \(accessToken)")
+                self.loginComplete()
+            }
+        }
+    }
+    
+    func gmailButtonStyling() {
+        let gmailLogo = UIImage(named: "googleLogo.png")
+        gmailLoginButton.setTitle("Sign in with Gmail", for: .normal)
+        gmailLoginButton.setImage(gmailLogo, for: .normal)
+        gmailLoginButton.semanticContentAttribute = .forceLeftToRight
+        gmailLoginButton.setTitleColor(.white, for: .normal)
+        gmailLoginButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        facebookLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        gmailLoginButton.imageView?.contentMode = .scaleAspectFit
+        gmailLoginButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 192)
+        gmailLoginButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        gmailLoginButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 17, bottom: 0, right: 17)
+        self.gmailLoginButton.titleLabel?.adjustsFontSizeToFitWidth = true;
+        gmailLoginButton.imageView?.widthAnchor.constraint(equalTo: facebookLoginButton.imageView!.widthAnchor, multiplier: 1.0).isActive = true
+        gmailLoginButton.imageView?.heightAnchor.constraint(equalTo: facebookLoginButton.imageView!.heightAnchor, multiplier: 1.0).isActive = true
+        
+        gmailLoginButton.layer.cornerRadius = 5
     }
     
 }

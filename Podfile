@@ -7,7 +7,9 @@ target 'On The Map' do
 
   # Pods for On The Map
   
-  pod 'FBSDKLoginKit'
+  pod 'FBSDKCoreKit/Swift'
+  pod 'FBSDKLoginKit/Swift'
+  pod 'FBSDKShareKit/Swift'
 
   target 'On The MapTests' do
     inherit! :search_paths
