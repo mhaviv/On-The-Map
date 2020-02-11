@@ -11,6 +11,7 @@ import UIKit
 import SafariServices
 import FBSDKCoreKit
 import FBSDKLoginKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController, UINavigationControllerDelegate {
     
@@ -42,6 +43,11 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         gmailButtonStyling()
         
         dontHaveAnAccountLabel.adjustsFontSizeToFitWidth = true
+        
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+
+        // Automatically sign in the user.
+        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +109,7 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
             UIApplication.shared.keyWindow?.rootViewController = tabBarController
             UIApplication.shared.keyWindow?.makeKeyAndVisible()
         }
+        
     }
     
     @IBAction func signUpPressed(_ sender: Any) {
@@ -173,6 +180,12 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         
         gmailLoginButton.layer.cornerRadius = 5
     }
+    
+    @IBAction func loginWithGmail(_ sender: Any) {
+        GIDSignIn.sharedInstance()?.signIn()
+    }
+    
+    
     
 }
 

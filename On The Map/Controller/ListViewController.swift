@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import GoogleSignIn
 
 class ListViewController: UITableViewController {
     
@@ -93,6 +94,7 @@ class ListViewController: UITableViewController {
     
     @IBAction func logoutPressed(_ sender: Any) {
         TabBarViewController.sharedInstance().logout()
+        GIDSignIn.sharedInstance().signOut()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

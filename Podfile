@@ -7,9 +7,13 @@ target 'On The Map' do
 
   # Pods for On The Map
   
-  pod 'FBSDKCoreKit/Swift'
-  pod 'FBSDKLoginKit/Swift'
-  pod 'FBSDKShareKit/Swift'
+    # Facebook Pods
+    pod 'FBSDKCoreKit/Swift'
+    pod 'FBSDKLoginKit/Swift'
+    pod 'FBSDKShareKit/Swift'
+    
+    # Gmail Pods
+    pod 'GoogleSignIn'
 
   target 'On The MapTests' do
     inherit! :search_paths

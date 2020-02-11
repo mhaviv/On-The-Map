@@ -9,6 +9,7 @@
 import Foundation
 import MapKit
 import UIKit
+import GoogleSignIn
 
 class MapViewController: UIViewController {
     
@@ -81,6 +82,7 @@ class MapViewController: UIViewController {
     @IBAction func logoutPressed(_ sender: Any) {
         // identify the data you need for logout, modify the logout function to take that data and call API function from logout.
         TabBarViewController.sharedInstance().logout()
+        GIDSignIn.sharedInstance().signOut()
     }
     
 }

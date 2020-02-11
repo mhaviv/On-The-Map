@@ -34,6 +34,7 @@
 		CCC322B82377AA2200A48791 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B72377AA2200A48791 /* LoginViewController.swift */; };
 		CCC322BA2377AC6A00A48791 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B92377AC6A00A48791 /* ListCell.swift */; };
 		CCC322BE2377B71200A48791 /* StudentAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322BD2377B71200A48791 /* StudentAnnotation.swift */; };
+		CCF0C46223F3099800B53E32 /* GoogleCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCF0C46123F3099800B53E32 /* GoogleCredentials.plist */; };
 		D38173E843300F31331C59C8 /* Pods_On_The_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A0D16BFA62B3BC409CCD09 /* Pods_On_The_Map.framework */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		CCC322B72377AA2200A48791 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CCC322B92377AC6A00A48791 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		CCC322BD2377B71200A48791 /* StudentAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAnnotation.swift; sourceTree = "<group>"; };
+		CCF0C46123F3099800B53E32 /* GoogleCredentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GoogleCredentials.plist; path = ../../../../Downloads/GoogleCredentials.plist; sourceTree = "<group>"; };
 		CFD0931211AC16DB8D5C8EAE /* Pods-On The Map-On The MapUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-On The Map-On The MapUITests.debug.xcconfig"; path = "Target Support Files/Pods-On The Map-On The MapUITests/Pods-On The Map-On The MapUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D73308E9D2D75D9D6C25F4E3 /* Pods-On The Map-On The MapUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-On The Map-On The MapUITests.release.xcconfig"; path = "Target Support Files/Pods-On The Map-On The MapUITests/Pods-On The Map-On The MapUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EAFF63844474E89FE60A74C8 /* Pods-On The MapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-On The MapTests.debug.xcconfig"; path = "Target Support Files/Pods-On The MapTests/Pods-On The MapTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				1E01E19F2371ED630059779E /* AppDelegate.swift */,
 				1E01E1A12371ED630059779E /* SceneDelegate.swift */,
+				CCF0C46123F3099800B53E32 /* GoogleCredentials.plist */,
 				1E01E1AD2371ED6E0059779E /* Info.plist */,
 				CCC5F9BB2373D0C60054B4A2 /* Model */,
 				CCC5F9BC2373D0CF0054B4A2 /* View */,
@@ -291,6 +294,7 @@
 				1E01E1992371ED630059779E /* Frameworks */,
 				1E01E19A2371ED630059779E /* Resources */,
 				6AE0FD8F9619591F04302CD5 /* [CP] Embed Pods Frameworks */,
+				3F109DC15BE82D95021D70D2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -329,6 +333,7 @@
 				1E01E1BA2371ED6E0059779E /* Frameworks */,
 				1E01E1BB2371ED6E0059779E /* Resources */,
 				C623AD1E030705814282689A /* [CP] Embed Pods Frameworks */,
+				31AF7806EE12A9A7B8886F25 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -389,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E01E1AC2371ED6E0059779E /* LaunchScreen.storyboard in Resources */,
+				CCF0C46223F3099800B53E32 /* GoogleCredentials.plist in Resources */,
 				1E01E1A92371ED6D0059779E /* Assets.xcassets in Resources */,
 				1E01E1A72371ED630059779E /* Main.storyboard in Resources */,
 			);
@@ -411,6 +417,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		31AF7806EE12A9A7B8886F25 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-On The Map-On The MapUITests/Pods-On The Map-On The MapUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-On The Map-On The MapUITests/Pods-On The Map-On The MapUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-On The Map-On The MapUITests/Pods-On The Map-On The MapUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3230502D0E1C74CE9A3F9FB2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -431,6 +454,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3F109DC15BE82D95021D70D2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-On The Map/Pods-On The Map-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-On The Map/Pods-On The Map-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-On The Map/Pods-On The Map-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		566A6CF7F9AC3C9710E05DF0 /* [CP] Check Pods Manifest.lock */ = {
