@@ -26,6 +26,7 @@ class APIConstants {
         case session
         case user
         case location(limit: Int, skip: Int, order: String)
+        case postLocation
         
         func url() -> String {
             switch self {
@@ -35,6 +36,8 @@ class APIConstants {
                 return baseURL + "users/"
             case .location(let limit, let skip, let order):
                 return baseURL + "StudentLocation?limit=\(limit)&skip=\(skip)&order=\(order)"
+            case .postLocation:
+                return baseURL + "StudentLocation"
             }
         }
     }

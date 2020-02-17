@@ -34,6 +34,7 @@
 		CCC322B82377AA2200A48791 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B72377AA2200A48791 /* LoginViewController.swift */; };
 		CCC322BA2377AC6A00A48791 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B92377AC6A00A48791 /* ListCell.swift */; };
 		CCC322BE2377B71200A48791 /* StudentAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322BD2377B71200A48791 /* StudentAnnotation.swift */; };
+		CCEFEF3B23F5DDC500B8D6DB /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEFEF3A23F5DDC500B8D6DB /* Spinner.swift */; };
 		CCF0C46223F3099800B53E32 /* GoogleCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCF0C46123F3099800B53E32 /* GoogleCredentials.plist */; };
 		D38173E843300F31331C59C8 /* Pods_On_The_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A0D16BFA62B3BC409CCD09 /* Pods_On_The_Map.framework */; };
 /* End PBXBuildFile section */
@@ -90,6 +91,7 @@
 		CCC322B72377AA2200A48791 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CCC322B92377AC6A00A48791 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		CCC322BD2377B71200A48791 /* StudentAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAnnotation.swift; sourceTree = "<group>"; };
+		CCEFEF3A23F5DDC500B8D6DB /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		CCF0C46123F3099800B53E32 /* GoogleCredentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = GoogleCredentials.plist; path = ../../../../Downloads/GoogleCredentials.plist; sourceTree = "<group>"; };
 		CFD0931211AC16DB8D5C8EAE /* Pods-On The Map-On The MapUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-On The Map-On The MapUITests.debug.xcconfig"; path = "Target Support Files/Pods-On The Map-On The MapUITests/Pods-On The Map-On The MapUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D73308E9D2D75D9D6C25F4E3 /* Pods-On The Map-On The MapUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-On The Map-On The MapUITests.release.xcconfig"; path = "Target Support Files/Pods-On The Map-On The MapUITests/Pods-On The Map-On The MapUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,8 +175,8 @@
 		1E03F5D123A1A2D90027C59E /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				1E03F5D223A1A3110027C59E /* UserPayload.swift */,
 				1E03F5D423A1A31A0027C59E /* UdacityPayload.swift */,
+				1E03F5D223A1A3110027C59E /* UserPayload.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -270,6 +272,7 @@
 				1E28008E2399597200E38E74 /* TabBarViewController.swift */,
 				CC5FE50B239A1989006816AF /* TabBarVCHelper.swift */,
 				CC5FE513239E0DCF006816AF /* AddLocationViewController.swift */,
+				CCEFEF3A23F5DDC500B8D6DB /* Spinner.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				CC5FE51623A1F87C006816AF /* ParseResponse.swift in Sources */,
 				CC5FE50E239DA379006816AF /* UserData.swift in Sources */,
 				1E03F5CE23A15BD10027C59E /* APIManager.swift in Sources */,
+				CCEFEF3B23F5DDC500B8D6DB /* Spinner.swift in Sources */,
 				1E03F5D023A15EE60027C59E /* APIConstants.swift in Sources */,
 				1E01E1A02371ED630059779E /* AppDelegate.swift in Sources */,
 				1E01E1A22371ED630059779E /* SceneDelegate.swift in Sources */,

@@ -23,6 +23,7 @@ class MapViewController: UIViewController {
         mapView.delegate = self
         
         setInitialMapLocation()
+        self.enableViews(false)
         getUserData()
     }
     
@@ -40,7 +41,7 @@ class MapViewController: UIViewController {
     
     
     func getUserData() {
-        ParseClient().getLocations { (results) in
+        ParseClient.sharedInstance().getLocations { (results) in
           guard let studentInfo = results else {
               print("No Results from Parse API")
             
@@ -67,17 +68,43 @@ class MapViewController: UIViewController {
             }
                         
             self.locations = mappedLocations
-            print("locations retrieved")
+            print("locations data retrieved")
+            
+            if self.mapView.annotations.count == 0 {
+                self.displayLocations()
+            }
                         
-            self.displayLocations()
-        
+            
       }
     }
     
     func displayLocations() {
-        mapView.addAnnotations(locations)
-        print("locations rendered to map")
+        DispatchQueue.main.async {
+            self.mapView.addAnnotations(self.locations)
+        }
+        if mapView.annotations.count > 0 {
+            print("locations rendered to map")
+            self.enableViews(true)
+        } else {
+            print("locations could not be rendered")
+            self.displayLocations()
+        }
     }
+    
+    /// Enables or disables the views to display the loading state.
+    private func enableViews(_ isEnabled: Bool) {
+        if isEnabled == true {
+            DispatchQueue.main.async {
+                Spinner.stop()
+            }
+        } else {
+            DispatchQueue.main.async {
+                Spinner.start()
+            }
+        }
+    }
+    
+    
     
     @IBAction func logoutPressed(_ sender: Any) {
         // identify the data you need for logout, modify the logout function to take that data and call API function from logout.

@@ -46,35 +46,12 @@ class ListViewController: UITableViewController {
                 }
                             
                 self.students = mappedStudents
-//                print("this is mapped students \(self.students)")
                 print("locations retrieved")
 
-                
-//                self.displayStudents()
-            
+                            
           }
         }
     
-//    func displayStudents() {
-//        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! ListCell
-//            let studentObject = students[indexPath.row]
-//
-//            cell.cellImageView.contentMode = .scaleAspectFit
-//            cell.nameLabel.text = studentObject.firstname + " " + studentObject.lastName
-//            cell.urlLabel.text = studentObject.mediaUrl
-//            return cell
-//        }
-//
-//        func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//            return true
-//        }
-//
-//        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//            students.count == 0 ? showEmptyView(true) : showEmptyView(false)
-//            return students.count
-//        }
-//    }
     
     func showEmptyView(_ show: Bool) {
         if show {
@@ -113,20 +90,4 @@ class ListViewController: UITableViewController {
         students.count == 0 ? showEmptyView(true) : showEmptyView(false)
         return students.count
     }
-    
-//    override func tableView(_ tableView: UITableView, willDisplayCell cell: ListCell, cellForRowAt indexPath: IndexPath) {
-//
-//        if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)) {
-//
-//            cell.separatorInset = UIEdgeInsets.zero
-//        }
-//        if cell.responds(to: #selector(setter: UITableViewCell.preservesSuperviewLayoutMargins)) {
-//
-//            cell.preservesSuperviewLayoutMargins = false
-//        }
-//        if cell.responds(to: #selector(setter: UITableViewCell.layoutMargins)) {
-//
-//            cell.layoutMargins = UIEdgeInsets.zero
-//        }
-//    }
 }

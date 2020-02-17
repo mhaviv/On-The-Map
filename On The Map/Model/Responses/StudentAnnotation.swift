@@ -34,7 +34,5 @@ class StudentAnnotation: NSObject, MKAnnotation {
 //        return locationDEK
 //    }
     
-    
-    // function that takes in json locationName and then forward geocodes to coordinates
-        
+            
 }
