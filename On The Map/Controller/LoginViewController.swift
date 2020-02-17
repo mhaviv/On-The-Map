@@ -71,10 +71,12 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func loginPressed(_ sender: Any) {
+        enableViews(false)
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
         if email.isEmpty || password.isEmpty {
             displayAlert(title: "Login Unsuccessful", message: "Username or Password is empty")
+            enableViews(true)
         } else {
             UdacityClient.sharedInstance().AuthenticateUser(username: email, password: password) { (response, error) in
                 
@@ -89,10 +91,12 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
                     if let errorCode = (error as NSError?)?.code, errorCode == 403 {
                         DispatchQueue.main.async {
                             self.displayAlert(title: "Login Unsuccessful", message: "Invalid Username and/or Password")
+                            self.enableViews(true)
                         }
                     } else {
                         DispatchQueue.main.async {
                             self.displayAlert(title: "Login Unsuccessful", message: "\(error?.localizedDescription)")
+                            self.enableViews(true)
                         }
                     }
                 }
@@ -109,6 +113,7 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
             UIApplication.shared.keyWindow?.rootViewController = tabBarController
             UIApplication.shared.keyWindow?.makeKeyAndVisible()
         }
+        enableViews(true)
         
     }
     
@@ -118,6 +123,19 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         if let url = URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated") {
             let svc = SFSafariViewController(url: url)
             self.present(svc, animated: true, completion: nil)
+        }
+    }
+    
+    /// Enables or disables the views to display the loading state.
+    private func enableViews(_ isEnabled: Bool) {
+        if isEnabled == true {
+            DispatchQueue.main.async {
+                Spinner.stop()
+            }
+        } else {
+            DispatchQueue.main.async {
+                Spinner.start()
+            }
         }
     }
     

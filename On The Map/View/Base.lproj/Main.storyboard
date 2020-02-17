@@ -48,7 +48,11 @@
                                     </segue>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="refresh" id="exB-5L-c7C"/>
+                            <barButtonItem systemItem="refresh" id="exB-5L-c7C">
+                                <connections>
+                                    <action selector="refreshButtonPressed:" destination="BYZ-38-t0r" id="V8G-5d-IRy"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -298,7 +302,11 @@
                                     </segue>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="refresh" id="hUT-bH-0xx"/>
+                            <barButtonItem systemItem="refresh" id="hUT-bH-0xx">
+                                <connections>
+                                    <action selector="refreshButtonPressed:" destination="Fvs-Q0-wkG" id="G1I-8K-4Gn"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>

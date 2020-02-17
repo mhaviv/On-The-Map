@@ -52,18 +52,6 @@ class MapViewController: UIViewController {
             let mappedLocations = studentInfo.compactMap() { (user) -> (StudentAnnotation) in
             
             return StudentAnnotation(with: CLLocationCoordinate2D(latitude: user.latitude, longitude: user.longitude), locationName: user.locationName, mediaURL: user.mediaURL)
-            
-//                mappedLocations.filter() {
-//                    let pattern = #"^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$"#
-//                    let regex = try NSRegularExpression(pattern: pattern, options: [])
-//                    if mappedLocations.t != regex {
-//
-//                        return
-//                    } else {
-//                        print("Title Passes: \(student)")
-//                        locations.append(<#T##newElement: StudentAnnotation##StudentAnnotation#>)
-//                    }
-//                }
         
             }
                         
@@ -76,6 +64,10 @@ class MapViewController: UIViewController {
                         
             
       }
+    }
+    
+    func updateUserData() {
+        
     }
     
     func displayLocations() {
@@ -104,6 +96,12 @@ class MapViewController: UIViewController {
         }
     }
     
+    @IBAction func refreshButtonPressed(_ sender: Any) {
+//        DispatchQueue.main.async {
+//            self.enableViews(false)
+//            self.getUserData()
+//        }
+    }
     
     
     @IBAction func logoutPressed(_ sender: Any) {

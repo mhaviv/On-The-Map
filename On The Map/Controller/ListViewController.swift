@@ -11,7 +11,7 @@ import UIKit
 import GoogleSignIn
 
 class ListViewController: UITableViewController {
-    
+        
     var students: [StudentTableViewObject] = []
             
     override func viewDidLoad() {
@@ -88,6 +88,12 @@ class ListViewController: UITableViewController {
             DispatchQueue.main.async {
                 Spinner.start()
             }
+        }
+    }
+    
+    @IBAction func refreshButtonPressed(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
     
