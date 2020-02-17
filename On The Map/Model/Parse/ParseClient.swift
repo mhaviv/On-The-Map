@@ -18,7 +18,7 @@ class ParseClient {
     }
     
     public func getLocations(completion: ((_ locations: [StudentData]?) -> ())?) {
-        APIManager.sharedInstance().getRequest(endpoint: .location(limit: 200, skip: 200, order: "-updatedAt")) { (data, response, error) in
+        APIManager.sharedInstance().getRequest(endpoint: .location(limit: 600, skip: 0, order: "-updatedAt")) { (data, response, error) in
             guard error == nil, let data = data else {
                 completion?(nil)
                 return

@@ -68,7 +68,7 @@ class MapViewController: UIViewController {
             }
                         
             self.locations = mappedLocations
-            print("locations data retrieved")
+            print("locations data retrieved for MapView")
             
             if self.mapView.annotations.count == 0 {
                 self.displayLocations()
