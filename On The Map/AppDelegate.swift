@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Initialize sign-in
-        GIDSignIn.sharedInstance().clientID = "538796324569-us5bpbghs5poa80bdb0lgaef21i1fpb3.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance().clientID = Environment.gmailClientID
         GIDSignIn.sharedInstance().delegate = self
 
         return true
