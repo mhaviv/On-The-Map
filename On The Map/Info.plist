@@ -106,5 +106,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>Google Credentials Dictionary</key>
+	<dict>
+		<key>GMAIL_CLIENT_ID</key>
+		<string>538796324569-us5bpbghs5poa80bdb0lgaef21i1fpb3.apps.googleusercontent.com</string>
+		<key>GMAIL_REVERSED_CLIENT_ID</key>
+		<string>com.googleusercontent.apps.538796324569-us5bpbghs5poa80bdb0lgaef21i1fpb3</string>
+	</dict>
 </dict>
 </plist>
