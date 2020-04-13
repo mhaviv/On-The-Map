@@ -36,6 +36,9 @@ xcuserdata/
 *.xccheckout
 *.xcscmblueprint
 .DS_Store
+Config/MyKeys.xcconfig
+Config/debug.xcconfig
+Config/release.xcconfig
 
 ## Obj-C/Swift specific
 *.hmap
