@@ -67,7 +67,6 @@ class AddLocationViewController: UIViewController {
                 
                 if let location = location,
                     let request = AddStudentRequest(location: (location, locationString), mediaURL: mediaURL, userData: UserData(firstName: "Joe", lastName: "Doe", key: "1234")) {
-                    // get login first name, last name, get loca
                     print(location)
                     self?.postLocations(request, location: location)
                     
