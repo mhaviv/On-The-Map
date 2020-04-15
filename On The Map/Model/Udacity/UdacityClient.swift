@@ -57,11 +57,10 @@ class UdacityClient {
             print(error.localizedDescription)
             completion(nil, error)
         }
-        
        
     }
     
-    public func LogoutUser(completion: @escaping (_ response: Session?, _ error: Error?) -> Void) {
+    public func LogoutUser(completion: @escaping (_ response: SessionResponse.Session?, _ error: Error?) -> Void) {
         
         var xsrfCookie: HTTPCookie? = nil
         let sharedCookieStorage = HTTPCookieStorage.shared

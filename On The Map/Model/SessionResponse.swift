@@ -12,19 +12,19 @@ import Foundation
  Data model is Codable because the response is in JSON. The data is converted into raw data and then parsed to map it to our data model which is SessionResponse
  */
 
-struct Session: Codable {
-    let id: String?
-    let expiration: String?
-}
-
-struct Account: Codable {
-    let registered: Bool?
-    let key: String?
-}
 
 struct SessionResponse: Codable {
+
+    struct Session: Codable {
+        let id: String?
+        let expiration: String?
+    }
+
+    struct Account: Codable {
+        let registered: Bool?
+        let key: String?
+    }
+    
     let account: Account?
     let session: Session?
 }
-
-

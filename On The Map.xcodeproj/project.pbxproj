@@ -33,6 +33,9 @@
 		CCA8B89A23FC40F5004E3A6E /* StudentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8B89923FC40F5004E3A6E /* StudentDetailViewController.swift */; };
 		CCA8B8D523FD87C5004E3A6E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8B8D423FD87C4004E3A6E /* Environment.swift */; };
 		CCA8B8D724005988004E3A6E /* GoogleCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8B8D624005987004E3A6E /* GoogleCredentials.swift */; };
+		CCA9EE7324477E130095BCED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA9EE7224477E130095BCED /* Constants.swift */; };
+		CCA9EE76244781DE0095BCED /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA9EE75244781DE0095BCED /* Session.swift */; };
+		CCA9EE78244782420095BCED /* SessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA9EE77244782420095BCED /* SessionProvider.swift */; };
 		CCC322B12377A7DC00A48791 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B02377A7DC00A48791 /* MapViewController.swift */; };
 		CCC322B32377A91400A48791 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B22377A91400A48791 /* ListViewController.swift */; };
 		CCC322B82377AA2200A48791 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC322B72377AA2200A48791 /* LoginViewController.swift */; };
@@ -97,6 +100,9 @@
 		CCA8B89C23FC4BB6004E3A6E /* MyKeys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = MyKeys.xcconfig; sourceTree = "<group>"; };
 		CCA8B8D423FD87C4004E3A6E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		CCA8B8D624005987004E3A6E /* GoogleCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCredentials.swift; sourceTree = "<group>"; };
+		CCA9EE7224477E130095BCED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CCA9EE75244781DE0095BCED /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		CCA9EE77244782420095BCED /* SessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionProvider.swift; sourceTree = "<group>"; };
 		CCC322B02377A7DC00A48791 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CCC322B22377A91400A48791 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		CCC322B72377AA2200A48791 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +170,7 @@
 				1E01E19F2371ED630059779E /* AppDelegate.swift */,
 				1E01E1A12371ED630059779E /* SceneDelegate.swift */,
 				CCF0C46123F3099800B53E32 /* GoogleCredentials.plist */,
+				CCA9EE7224477E130095BCED /* Constants.swift */,
 				1E01E1AD2371ED6E0059779E /* Info.plist */,
 				CCA8B89B23FC4B60004E3A6E /* Config */,
 				CCC5F9BB2373D0C60054B4A2 /* Model */,
@@ -177,6 +184,9 @@
 		1E03F5CA23A15B8C0027C59E /* API */ = {
 			isa = PBXGroup;
 			children = (
+				CCC5F9BF2373D1FC0054B4A2 /* Data */,
+				1E03F5D123A1A2D90027C59E /* Requests */,
+				1EDF4332237B543E005BA256 /* Responses */,
 				1E03F5CF23A15EE60027C59E /* APIConstants.swift */,
 				1E03F5CB23A15BC00027C59E /* APIProtocol.swift */,
 				1E03F5CD23A15BD10027C59E /* APIManager.swift */,
@@ -256,13 +266,20 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
+		CCA9EE74244781C60095BCED /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				CCA9EE75244781DE0095BCED /* Session.swift */,
+				CCA9EE77244782420095BCED /* SessionProvider.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
 		CCC5F9BB2373D0C60054B4A2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCA9EE74244781C60095BCED /* Domain */,
 				1E03F5CA23A15B8C0027C59E /* API */,
-				CCC5F9BF2373D1FC0054B4A2 /* Data */,
-				1E03F5D123A1A2D90027C59E /* Requests */,
-				1EDF4332237B543E005BA256 /* Responses */,
 				CC5FE50F239DAE4E006816AF /* Udacity */,
 				CC5FE510239DAE67006816AF /* Parse */,
 			);
@@ -588,6 +605,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC99F26923878AFF00577107 /* SessionResponse.swift in Sources */,
+				CCA9EE76244781DE0095BCED /* Session.swift in Sources */,
 				CC99F25B2383AA0400577107 /* UdacityClient.swift in Sources */,
 				1E03F5CC23A15BC00027C59E /* APIProtocol.swift in Sources */,
 				CC5FE51623A1F87C006816AF /* ParseResponse.swift in Sources */,
@@ -598,6 +616,7 @@
 				1E01E1A02371ED630059779E /* AppDelegate.swift in Sources */,
 				CCA8B8D724005988004E3A6E /* GoogleCredentials.swift in Sources */,
 				1E01E1A22371ED630059779E /* SceneDelegate.swift in Sources */,
+				CCA9EE7324477E130095BCED /* Constants.swift in Sources */,
 				1E28008F2399597200E38E74 /* TabBarViewController.swift in Sources */,
 				CC5FE512239DAE8A006816AF /* ParseClient.swift in Sources */,
 				CC5FE50C239A198A006816AF /* TabBarVCHelper.swift in Sources */,
@@ -613,6 +632,7 @@
 				CCC322B82377AA2200A48791 /* LoginViewController.swift in Sources */,
 				CCC322BA2377AC6A00A48791 /* ListCell.swift in Sources */,
 				CCC322B32377A91400A48791 /* ListViewController.swift in Sources */,
+				CCA9EE78244782420095BCED /* SessionProvider.swift in Sources */,
 				CCA8B89A23FC40F5004E3A6E /* StudentDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
