@@ -19,33 +19,25 @@ extension TabBarViewController {
         }
     }
     
-        func logout() {
-            UdacityClient.sharedInstance().LogoutUser { (session, error) in
-                if error == nil {
-                    DispatchQueue.main.async {
-                        if let loginViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-                            UIApplication.shared.keyWindow?.rootViewController = loginViewController
-                            UIApplication.shared.keyWindow?.makeKeyAndVisible()
-                        }
-                    }
-                    
-                } else if error != nil {
-                    DispatchQueue.main.async {
-                        self.displayAlert(title: "Logout Unsuccessful", message: "\(error!.localizedDescription)")
-                        
-                        return
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.displayAlert(title: "Logout Unsuccessful", message: "Logout Failed")
-                        
-                        return
-                    }
+    func logout() {
+        UdacityClient.sharedInstance().LogoutUser { [weak self] (session, error) in
+            if error == nil {
+                if let loginViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+                    UIApplication.shared.keyWindow?.rootViewController = loginViewController
+                    UIApplication.shared.keyWindow?.makeKeyAndVisible()
                 }
-                //have generic alert method which takes message and actions
-                DispatchQueue.main.async {
-                    self.displayAlert(title: "Logout Successful", message: "You have logged out successfully")
-                }
+                
+            } else if error != nil {
+                self?.displayAlert(title: "Logout Unsuccessful", message: "\(error!.localizedDescription)")
+                
+                return
+            } else {
+                self?.displayAlert(title: "Logout Unsuccessful", message: "Logout Failed")
+                
+                return
             }
+            //have generic alert method which takes message and actions
+            self?.displayAlert(title: "Logout Successful", message: "You have logged out successfully")
         }
     }
+}
