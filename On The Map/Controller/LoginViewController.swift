@@ -78,28 +78,36 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
             displayAlert(title: "Login Unsuccessful", message: "Username or Password is empty")
             enableViews(true)
         } else {
-            UdacityClient.sharedInstance().AuthenticateUser(username: email, password: password) { [weak self] (response, error) in
-                
-                if let sessionResponse = response {
-                    self?.session = sessionResponse
-                    // Use main thread to update UI changes
-                    self?.loginComplete()
-                    print("Login Successful!")
-                } else if error != nil {
-                    if let errorCode = (error as NSError?)?.code, errorCode == 403 {
-                        self?.displayAlert(title: "Login Unsuccessful", message: "Invalid Username and/or Password")
-                        self?.enableViews(true)
-                    } else {
-                        self?.displayAlert(title: "Login Unsuccessful", message: "\(error?.localizedDescription)")
-                        self?.enableViews(true)
-                    }
-                }
-            }
+            authenticateUser(email: email, password: password)
         }
-        
     }
     
+    private func handleAuthenticationError(_ error: Error) {
+        let message: String = {
+            if let errorCode = (error as NSError?)?.code, errorCode == 403 {
+                return "Invalid Username and/or Password"
+            }
+            return "\(error.localizedDescription)"
+        }()
+        displayAlert(title: "Login Unsuccessful", message: message)
+        enableViews(true)
+    }
     
+    private func handleAuthenticationResponse(_ response: SessionResponse?, error: Error?) {
+        if let sessionResponse = response {
+            session = sessionResponse
+            loginComplete()
+            print("Login Successful!")
+        } else if let error = error {
+            handleAuthenticationError(error)
+        }
+    }
+    
+    private func authenticateUser(email: String, password: String) {
+        UdacityClient.sharedInstance().AuthenticateUser(username: email, password: password) { [weak self] (response, error) in
+            self?.handleAuthenticationResponse(response, error: error)
+        }
+    }
     
     private func loginComplete() {
         // Make Tab Bar Controller root controller on successful login
@@ -108,7 +116,6 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
             UIApplication.shared.keyWindow?.makeKeyAndVisible()
         }
         enableViews(true)
-        
     }
     
     @IBAction func signUpPressed(_ sender: Any) {
@@ -147,9 +154,7 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         facebookLoginButton.imageEdgeInsets = UIEdgeInsets(top: 3, left: 0, bottom: 5, right: 200)
         facebookLoginButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         facebookLoginButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        self.facebookLoginButton.titleLabel?.adjustsFontSizeToFitWidth = true;
-        
-        
+        facebookLoginButton.titleLabel?.adjustsFontSizeToFitWidth = true;
         facebookLoginButton.layer.cornerRadius = 5
     }
     
@@ -170,6 +175,7 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
     
+    //TODO: create a GoogleButton which inherits UIButton and move styling logic in func awakeFromNib()
     func gmailButtonStyling() {
         let gmailLogo = UIImage(named: "googleLogo.png")
         gmailLoginButton.setTitle("Sign in with Gmail", for: .normal)
@@ -229,5 +235,22 @@ extension LoginViewController: UITextFieldDelegate {
     func unsubscribeToKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+}
+
+//TODO: Move styling here
+class GoogleButton: SocialButton {
+    
+}
+
+class SocialButton: UIButton {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupStyle()
+    }
+    
+    private func setupStyle() {
+        
     }
 }

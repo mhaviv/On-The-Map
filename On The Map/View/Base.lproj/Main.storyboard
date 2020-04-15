@@ -161,7 +161,7 @@
                                                             <action selector="loginWithFacebook:" destination="qEd-Z6-j7J" eventType="touchUpInside" id="I3l-Qu-zmD"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twC-NR-Tjy" userLabel="Gmail Button">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twC-NR-Tjy" userLabel="Gmail Button" customClass="GoogleButton" customModule="On_The_Map" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="39" width="220" height="34"/>
                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.27450980390000002" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
