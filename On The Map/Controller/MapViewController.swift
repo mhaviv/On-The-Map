@@ -41,29 +41,25 @@ class MapViewController: UIViewController {
     
     
     func getUserData() {
-        ParseClient.sharedInstance().getLocations { (results) in
-          guard let studentInfo = results else {
-              print("No Results from Parse API")
-            
-              return
-          }
+        ParseClient.sharedInstance().getLocations { [weak self] (results) in
+            guard let studentInfo = results else {
+                print("No Results from Parse API")
+                return
+            }
             
             // Maps student data and filters nil values with compactMap
             let mappedLocations = studentInfo.compactMap() { (user) -> (StudentAnnotation) in
-            
-            return StudentAnnotation(with: CLLocationCoordinate2D(latitude: user.latitude, longitude: user.longitude), locationName: user.locationName, mediaURL: user.mediaURL)
-        
+                return StudentAnnotation(with: CLLocationCoordinate2D(latitude: user.latitude, longitude: user.longitude), locationName: user.locationName, mediaURL: user.mediaURL)
+                
             }
-                        
-            self.locations = mappedLocations
+            
+            self?.locations = mappedLocations
             print("locations data retrieved for MapView")
             
-            if self.mapView.annotations.count == 0 {
-                self.displayLocations()
+            if self?.mapView.annotations.count == 0 {
+                self?.displayLocations()
             }
-                        
-            
-      }
+        }
     }
     
     func updateUserData() {
@@ -71,36 +67,25 @@ class MapViewController: UIViewController {
     }
     
     func displayLocations() {
-        DispatchQueue.main.async {
-            self.mapView.addAnnotations(self.locations)
-        }
+        self.mapView.addAnnotations(self.locations)
+        
         if mapView.annotations.count > 0 {
             print("locations rendered to map")
             self.enableViews(true)
-        } else {
-            print("locations could not be rendered")
-            self.displayLocations()
         }
     }
     
     /// Enables or disables the views to display the loading state.
     private func enableViews(_ isEnabled: Bool) {
         if isEnabled == true {
-            DispatchQueue.main.async {
-                Spinner.stop()
-            }
+            Spinner.stop()
         } else {
-            DispatchQueue.main.async {
-                Spinner.start()
-            }
+            Spinner.start()
         }
     }
     
     @IBAction func refreshButtonPressed(_ sender: Any) {
-//        DispatchQueue.main.async {
-//            self.enableViews(false)
-//            self.getUserData()
-//        }
+        
     }
     
     
@@ -120,7 +105,7 @@ extension MapViewController: MKMapViewDelegate {
         
         // Check to see if a reusable annotation view is available
         if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        as? MKMarkerAnnotationView {
+            as? MKMarkerAnnotationView {
             dequeuedView.annotation = annotation
             view = dequeuedView
         } else {
