@@ -27,31 +27,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
-      if let error = error {
-        if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-          print("The user has not signed in before or they have since signed out.")
-        } else {
-          print("\(error.localizedDescription)")
+        if let error = error {
+            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+                print("The user has not signed in before or they have since signed out.")
+            } else {
+                print("\(error.localizedDescription)")
+            }
+            return
         }
-        return
-      }
         // Make Tab Bar Controller root controller on successful login
         if let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeTab") as? TabBarViewController {
             UIApplication.shared.keyWindow?.rootViewController = tabBarController
             UIApplication.shared.keyWindow?.makeKeyAndVisible()
         }
         
-      // Perform any operations on signed in user here.
-      let userId = user.userID                  // For client-side use only!
-      let idToken = user.authentication.idToken // Safe to send to the server
-      let fullName = user.profile.name
-      let givenName = user.profile.givenName
-      let familyName = user.profile.familyName
-      let email = user.profile.email
+        // Perform any operations on signed in user here.
+        let userId = user.userID                  // For client-side use only!
+        let idToken = user.authentication.idToken // Safe to send to the server
+        let fullName = user.profile.name
+        let givenName = user.profile.givenName
+        let familyName = user.profile.familyName
+        let email = user.profile.email
         
         NotificationCenter.default.post(
-        name: Notification.Name(rawValue: "ToggleAuthUINotification"),
-        object: nil,
+            name: Notification.Name(rawValue: "ToggleAuthUINotification"),
+            object: nil,
         userInfo: ["statusText": "Signed in user:\n\(fullName)"])
     }
     
