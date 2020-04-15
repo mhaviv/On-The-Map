@@ -39,45 +39,50 @@ class APIManager: API {
         return request
     }
     
+    // MARK: Resume Request Method
+    // Use this reusable method to create dataTask
+    private func resumeRequest(_ request: URLRequest, completion: @escaping(Data?, URLResponse?, Error?) -> Void) {
+        URLSession.shared.dataTask(with: request) { (dataResp, response, error) in
+            DispatchQueue.main.async {
+                completion(dataResp, response, error)
+            }
+        }.resume()
+    }
     
     //MARK: GET Request Method
+    
     func getRequest(endpoint: APIConstants.Endpoint, data: Data? = nil, completion: @escaping(Data?, URLResponse?, Error?) -> ()) {
         guard let request = Self.request(data: data, urlString: endpoint.url(), type: .GET) else {
-            completion(nil, nil, nil)
-            
+            DispatchQueue.main.async {
+                completion(nil, nil, nil)
+            }
             return
         }
-        
-        URLSession.shared.dataTask(with: request) { (dataResp, response, error) in
-            completion(dataResp, response, error)
-        }.resume()
+        resumeRequest(request, completion: completion)
     }
     
     //MARK: POST Request Method
     func postRequest(endpoint: APIConstants.Endpoint, data: Data? = nil, completion: @escaping(Data?, URLResponse?, Error?) -> ()) {
         guard let request = Self.request(data: data, urlString: endpoint.url(), type: .POST) else {
-            completion(nil, nil, nil)
+            DispatchQueue.main.async {
+                completion(nil, nil, nil)
+            }
             
             return
         }
-        
-        URLSession.shared.dataTask(with: request) { (dataResp, response, error) in
-            completion(dataResp, response, error)
-        }.resume()
+        resumeRequest(request, completion: completion)
     }
     
     //MARK: Delete Request Method
     func deleteRequest(endpoint: APIConstants.Endpoint, cookie: HTTPCookie, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         guard var request = Self.request(data: nil, urlString: endpoint.url(), type: .DELETE) else {
-            completion(nil, nil, nil)
-            
+            DispatchQueue.main.async {
+                completion(nil, nil, nil)
+            }
             return
         }
         
         request.setValue(cookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
-        
-        URLSession.shared.dataTask(with: request) { (dataResp, response, error) in
-            completion(dataResp, response, error)
-        }.resume()
+        resumeRequest(request, completion: completion)
     }
 }
