@@ -45,7 +45,7 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         dontHaveAnAccountLabel.adjustsFontSizeToFitWidth = true
         
         GIDSignIn.sharedInstance()?.presentingViewController = self
-
+        
         // Automatically sign in the user.
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
     }
@@ -78,26 +78,20 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
             displayAlert(title: "Login Unsuccessful", message: "Username or Password is empty")
             enableViews(true)
         } else {
-            UdacityClient.sharedInstance().AuthenticateUser(username: email, password: password) { (response, error) in
+            UdacityClient.sharedInstance().AuthenticateUser(username: email, password: password) { [weak self] (response, error) in
                 
                 if let sessionResponse = response {
-                    self.session = sessionResponse
+                    self?.session = sessionResponse
                     // Use main thread to update UI changes
-                    DispatchQueue.main.async {
-                        self.loginComplete()
-                        print("Login Successful!")
-                    }
+                    self?.loginComplete()
+                    print("Login Successful!")
                 } else if error != nil {
                     if let errorCode = (error as NSError?)?.code, errorCode == 403 {
-                        DispatchQueue.main.async {
-                            self.displayAlert(title: "Login Unsuccessful", message: "Invalid Username and/or Password")
-                            self.enableViews(true)
-                        }
+                        self?.displayAlert(title: "Login Unsuccessful", message: "Invalid Username and/or Password")
+                        self?.enableViews(true)
                     } else {
-                        DispatchQueue.main.async {
-                            self.displayAlert(title: "Login Unsuccessful", message: "\(error?.localizedDescription)")
-                            self.enableViews(true)
-                        }
+                        self?.displayAlert(title: "Login Unsuccessful", message: "\(error?.localizedDescription)")
+                        self?.enableViews(true)
                     }
                 }
             }
@@ -129,13 +123,9 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
     /// Enables or disables the views to display the loading state.
     private func enableViews(_ isEnabled: Bool) {
         if isEnabled == true {
-            DispatchQueue.main.async {
-                Spinner.stop()
-            }
+            Spinner.stop()
         } else {
-            DispatchQueue.main.async {
-                Spinner.start()
-            }
+            Spinner.start()
         }
     }
     
@@ -159,7 +149,7 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         facebookLoginButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         self.facebookLoginButton.titleLabel?.adjustsFontSizeToFitWidth = true;
         
-
+        
         facebookLoginButton.layer.cornerRadius = 5
     }
     
