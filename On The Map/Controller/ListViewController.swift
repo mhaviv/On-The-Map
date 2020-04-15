@@ -11,9 +11,9 @@ import UIKit
 import GoogleSignIn
 
 class ListViewController: UITableViewController {
-        
+    
     var students: [StudentTableViewObject] = []
-            
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,53 +27,47 @@ class ListViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        self.tableView.reloadData()
     }
     
     func getUserData() {
-        ParseClient().getLocations { (results) in
-          guard let studentInfo = results else {
-            print("No Results from Parse API")
-            self.showEmptyView(true)
-            
-            return
-          }
+        ParseClient().getLocations { [weak self] (results) in
+            guard let studentInfo = results else {
+                print("No Results from Parse API")
+                self?.showEmptyView(true)
+                
+                return
+            }
             
             // Maps student data and filters nil values with compactMap
             let mappedStudents = studentInfo.compactMap() { (user) -> (StudentTableViewObject) in
-            
+                
                 return StudentTableViewObject(firstname: user.firstName, lastName: user.lastName, locationName: user.locationName, mediaUrl: user.mediaURL)
-
+                
             }
-                        
-            self.students = mappedStudents
+            
+            self?.students = mappedStudents
             print("location data retrieved for ListView")
-                        
+            
         }
     }
     
     
     func showEmptyView(_ show: Bool) {
         if show{
+            let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: self.tableView.frame.height))
+            label.numberOfLines = 2
+            label.textAlignment = .center
+            label.text = "No Locations Stored!\nClick '+' to add a location"
+            self.tableView.separatorStyle = .none
+            self.tableView.backgroundView = label
+            self.navigationItem.leftBarButtonItem = nil
             enableViews(true)
-            DispatchQueue.main.async {
-                let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: self.tableView.frame.height))
-                label.numberOfLines = 2
-                label.textAlignment = .center
-                label.text = "No Locations Stored!\nClick '+' to add a location"
-                self.tableView.separatorStyle = .none
-                self.tableView.backgroundView = label
-                self.navigationItem.leftBarButtonItem = nil
-            }
         } else {
+            self.tableView.backgroundView = nil
+            self.tableView.separatorStyle = .singleLine
+            self.navigationItem.leftBarButtonItem = self.editButtonItem
             enableViews(true)
-            DispatchQueue.main.async {
-                self.tableView.backgroundView = nil
-                self.tableView.separatorStyle = .singleLine
-                self.navigationItem.leftBarButtonItem = self.editButtonItem
-            }
             print("locations rendered to ListView")
         }
     }
@@ -81,20 +75,14 @@ class ListViewController: UITableViewController {
     /// Enables or disables the views to display the loading state.
     private func enableViews(_ isEnabled: Bool) {
         if isEnabled == true {
-            DispatchQueue.main.async {
-                Spinner.stop()
-            }
+            Spinner.stop()
         } else {
-            DispatchQueue.main.async {
-                Spinner.start()
-            }
+            Spinner.start()
         }
     }
     
     @IBAction func refreshButtonPressed(_ sender: Any) {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        self.tableView.reloadData()
     }
     
     @IBAction func logoutPressed(_ sender: Any) {
@@ -116,9 +104,8 @@ class ListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if students.count == 0 {
-            showEmptyView(true)
             enableViews(false)
-            tableView.reloadData()
+            showEmptyView(true)
         } else {
             showEmptyView(false)
             enableViews(true)
