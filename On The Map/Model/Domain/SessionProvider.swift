@@ -11,4 +11,3 @@ import Foundation
 enum SessionProvider {
     case facebook, google, udacity
 }
-c
