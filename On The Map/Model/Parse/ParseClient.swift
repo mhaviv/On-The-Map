@@ -25,7 +25,7 @@ class ParseClient {
             }
             
             do {
-                let result:ParseResponse = try JSONDecoder().decode(ParseResponse<StudentData>.self, from: data)
+                let result: ParseResponse = try JSONDecoder().decode(ParseResponse<StudentData>.self, from: data)
                 completion?(result.results)
             } catch {
                 print("Cannot Parse Location Data!")
@@ -33,12 +33,10 @@ class ParseClient {
             }
         }
     }
-    // [String:Any]
-    public func postLocations(studentData: StudentData, completion: ((_ successResponse: [StudentDataResponse]?) -> ())?) {
-        // Decode and encode student data to convert it to Data type
-        guard let studentDataDict = try? JSONDecoder().decode([String: String].self, from: JSONEncoder().encode(studentData)) else { return }
-        guard let data = try? JSONSerialization.data(withJSONObject: studentDataDict, options: []) else { return }
-
+    public func postLocations(request: AddStudentRequest, completion: ((_ successResponse: [StudentDataResponse]?) -> ())?) {
+        // should be enough to encode using the JSONEncoder
+        guard let data = try? JSONEncoder().encode(request) else { return }
+        
         APIManager.sharedInstance().postRequest(endpoint: .postLocation, data: data) { (data, response, error) in
             guard error == nil, let data = data else {
                 completion?(nil)
@@ -57,4 +55,3 @@ class ParseClient {
         }
     }
 }
-
