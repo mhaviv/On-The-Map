@@ -109,12 +109,16 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
     
-    private func loginComplete() {
-        // Make Tab Bar Controller root controller on successful login
+    private func navigateToHome() {
         if let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeTab") as? TabBarViewController {
             UIApplication.shared.keyWindow?.rootViewController = tabBarController
             UIApplication.shared.keyWindow?.makeKeyAndVisible()
         }
+    }
+    
+    private func loginComplete() {
+        // Make Tab Bar Controller root controller on successful login
+        navigateToHome()
         enableViews(true)
     }
     
