@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StudentData: Codable {
+struct StudentData: Decodable {
     
     var id: String
     var firstName: String
@@ -32,3 +32,25 @@ struct StudentData: Codable {
         case updatedAt
     }
 }
+
+struct AddStudentRequest: Encodable {
+    let uniqueKey: String
+    let firstName: String
+    let lastName: String
+    let mapString: String
+    let mediaURL: String
+    let latitude: Double
+    let longitude: Double
+}
+
+//struct Student {
+//
+//}
+//
+//struct StudentResponseAPI: Decodable {
+//
+//}
+//
+//struct StudentRequstAPI: Encodable {
+//
+//}
