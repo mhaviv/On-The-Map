@@ -16,7 +16,7 @@ open class Spinner: UIActivityIndicatorView {
     public static var style: UIActivityIndicatorView.Style = UIActivityIndicatorView.Style.large
     public static var baseBackColor = UIColor.black.withAlphaComponent(0.3)
     public static var baseColor = UIColor(red: 0, green: 162, blue: 224, alpha: 1)
-
+    
     
     public static func start(style: UIActivityIndicatorView.Style = style, backColor: UIColor = baseBackColor, baseColor: UIColor = baseColor) {
         // Add observer to check for orientation change
@@ -33,17 +33,21 @@ open class Spinner: UIActivityIndicatorView {
     }
     
     public static func stop() {
-        if spinner != nil {
-            spinner!.stopAnimating()
-            spinner!.removeFromSuperview()
-            spinner = nil
+        DispatchQueue.main.async {
+            if spinner != nil {
+                spinner!.stopAnimating()
+                spinner!.removeFromSuperview()
+                spinner = nil
+            }
         }
     }
     
     @objc public static func update() {
-        if spinner != nil {
-            stop()
-            start()
+        DispatchQueue.main.async {
+            if spinner != nil {
+                stop()
+                start()
+            }
         }
     }
     
