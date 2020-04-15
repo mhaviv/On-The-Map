@@ -11,8 +11,6 @@ import UIKit
 
 protocol API: class {
     
-    static func request(data: Data?, urlString: String, type: APIConstants.RequestType) -> URLRequest?
-    
     func getRequest(endpoint: APIConstants.Endpoint, data: Data?, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ())
     
     func postRequest(endpoint: APIConstants.Endpoint, data: Data?, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ())
