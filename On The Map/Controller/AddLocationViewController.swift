@@ -17,23 +17,22 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var mediaURLTextfield: UITextField!
     
     
-        
-//    let studentData = StudentData(id: userData, firstName: <#T##String#>, lastName: <#T##String#>, longitude: <#T##Double#>, latitude: <#T##Double#>, locationName: <#T##String#>, mediaURL: <#T##String#>, createdAt: <#T##String#>, updatedAt: <#T##String#>)
-//
+    
     // Decide whether we are performing a POST or a PUT request based on locationID
-    var locationID: String?
+    var locationID: String? // Is this needed?
     lazy var geocoder = CLGeocoder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        #if DEBUG
+        locationTextField.text = "1275 E 68th st Brooklyn, NY 11234"
+        mediaURLTextfield.text = "https://www.google.com"
+        #endif
     }
     
-    // Take in location string
-        // ?Split string into address, city, state and country?
-    // pass location string to geocoder
-    
-    
-    
+    /* Take in location string
+     Split string into address, city, state and country?
+     pass location string to geocoder */
     @IBAction func geocode(_ sender: Any) {
         
         let location = locationTextField.text ?? ""
@@ -49,72 +48,64 @@ class AddLocationViewController: UIViewController {
             return
         }
         
-        self.processGeocodeResponse(location: location)
+        processGeocodeResponse(location: location, mediaURL: mediaURL)
     }
     
-    private func processGeocodeResponse(location: String) {
-       enableViews(false)
-       geocoder.geocodeAddressString(location) { (placemarkers, error) in
-           
-        self.enableViews(true)
-           if let error = error {
-               self.displayAlert(title: "Error", message: "Unable to Forward Geocode Address: (\(error))")
-           } else {
-               var location: CLLocation?
-               
-               if let placemarks = placemarkers, placemarks.count > 0 {
-                   location = placemarks.first?.location
-               }
-               
-            if let location = location {
-                // get login first name, last name, get loca
-                print(location)
-//                let data =
-//                ParseClient.sharedInstance().postLocations(studentData: data) { (successResponse) in
-//                    self.syncStudentLocationToMap(location.coordinate)
-//                }
-                
+    private func processGeocodeResponse(location locationString: String, mediaURL: String) {
+        enableViews(false)
+        geocoder.geocodeAddressString(locationString) { [weak self] (placemarkers, error) in
+            
+            self?.enableViews(true)
+            if let error = error {
+                self?.displayAlert(title: "Error", message: "Unable to Forward Geocode Address: (\(error))")
             } else {
-                self.displayAlert(title: "Error", message: "No Matching Location Found")
+                var location: CLLocation?
+                
+                if let placemarks = placemarkers, placemarks.count > 0 {
+                    location = placemarks.first?.location
+                }
+                
+                if let location = location,
+                    let request = AddStudentRequest(location: (location, locationString), mediaURL: mediaURL, userData: UserData(firstName: "Joe", lastName: "Doe", key: "1234")) {
+                    // get login first name, last name, get loca
+                    print(location)
+                    self?.postLocations(request, location: location)
+                    
+                } else {
+                    self?.displayAlert(title: "Error", message: "No Matching Location Found")
+                }
             }
-           }
-       }
+        }
+    }
+    
+    private func postLocations(_ request: AddStudentRequest, location: CLLocation) {
+        ParseClient.sharedInstance().postLocations(request: request) { [weak self] (successResponse) in
+            self?.syncStudentLocationToMap(location.coordinate)
+        }
     }
     
     private func performSegueToMap() {
         if let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeTab") as? TabBarViewController {
-            UIApplication.shared.keyWindow?.rootViewController = tabBarController
-            UIApplication.shared.keyWindow?.makeKeyAndVisible()
+            UIApplication.shared.windows.first?.rootViewController = tabBarController
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
         }
     }
     
     private func syncStudentLocationToMap(_ coordinate: CLLocationCoordinate2D) {
         self.performSegueToMap()
-        
-        
     }
     
     func displayAlert(title: String, message: String?) {
-        DispatchQueue.main.async {
-            if let message = message {
-                let alert = UIAlertController(title: title, message: "\(message)", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
+        if let message = message {
+            let alert = UIAlertController(title: title, message: "\(message)", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
     /// Enables or disables the views to display the loading state.
     private func enableViews(_ isEnabled: Bool) {
-        if isEnabled == true {
-            DispatchQueue.main.async {
-                Spinner.stop()
-            }
-        } else {
-            DispatchQueue.main.async {
-                Spinner.start()
-            }
-        }
+        isEnabled ? Spinner.stop() : Spinner.start()
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
@@ -125,4 +116,17 @@ class AddLocationViewController: UIViewController {
         }
     }
     
+}
+
+extension AddStudentRequest {
+    init?(location: (CLLocation, name: String), mediaURL: String, userData: UserData) {
+        guard
+            let firstName = userData.firstName,
+            let lastName = userData.lastName,
+            let id = userData.key
+            else {
+                return nil
+        }
+        self.init(uniqueKey: id, firstName: firstName, lastName: lastName, mapString: location.name, mediaURL: mediaURL, latitude: location.0.coordinate.latitude, longitude: location.0.coordinate.longitude)
+    }
 }
