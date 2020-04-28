@@ -30,7 +30,11 @@ class MapViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func refreshButtonPressed(_ sender: Any) {
-//        ParseClient.sharedInstance().updateLocations(completion: <#T##(([StudentData]?) -> ())?##(([StudentData]?) -> ())?##([StudentData]?) -> ()#>)
+        self.enableViews(false)
+        for annotation in mapView.annotations{
+            mapView.removeAnnotation(annotation)
+        }
+        getUserData()
     }
     
     
@@ -78,7 +82,7 @@ class MapViewController: UIViewController {
     }
     
     func updateUserData() {
-        
+//        ParseClient.sharedInstance().updateLocations(completion: <#T##(([StudentData]?) -> ())?##(([StudentData]?) -> ())?##([StudentData]?) -> ()#>)
     }
     
     func displayLocations() {
