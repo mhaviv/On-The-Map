@@ -42,6 +42,7 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         facebookButtonStyling()
         gmailButtonStyling()
         
+        
         dontHaveAnAccountLabel.adjustsFontSizeToFitWidth = true
         
         GIDSignIn.sharedInstance()?.presentingViewController = self
@@ -52,6 +53,10 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let hasSession = (getUserSession() != nil)
+        if hasSession {
+            navigateToHome()
+        }
         
         self.subscribeToKeyboardNotifications()
     }
@@ -62,15 +67,10 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         self.unsubscribeToKeyboardNotifications()
     }
     
-    func displayAlert(title: String, message: String?) {
-        if let message = message {
-            let alert = UIAlertController(title: title, message: "\(message)", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
-    }
+    // MARK: - Actions
     
     @IBAction func loginPressed(_ sender: Any) {
+        view.endEditing(true)
         enableViews(false)
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
@@ -79,6 +79,47 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
             enableViews(true)
         } else {
             authenticateUser(email: email, password: password)
+        }
+    }
+    
+    @IBAction func signUpPressed(_ sender: Any) {
+        
+        /* Open Udacity Sign Up URL */
+        if let url = URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated") {
+            let svc = SFSafariViewController(url: url)
+            self.present(svc, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func loginWithFacebook(_ sender: Any) {
+        let manager = LoginManager()
+        manager.logIn(permissions: [.publicProfile, .email], viewController: self) { (result) in
+            switch result {
+            case .cancelled:
+                print("Facebook login cancelled")
+                break
+            case .failed(let error):
+                print("Facebook login failed: \(error.localizedDescription)")
+                break
+            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+                print("Access token == \(accessToken)")
+                
+                self.loginComplete(session: Session(expiration: accessToken.expirationDate, provider: .facebook))
+            }
+        }
+    }
+    
+    @IBAction func loginWithGmail(_ sender: Any) {
+        GIDSignIn.sharedInstance()?.signIn()
+    }
+    
+    // MARK: - Helpers
+    
+    func displayAlert(title: String, message: String?) {
+        if let message = message {
+            let alert = UIAlertController(title: title, message: "\(message)", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+            present(alert, animated: true, completion: nil)
         }
     }
     
@@ -96,7 +137,7 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
     private func handleAuthenticationResponse(_ response: SessionResponse?, error: Error?) {
         if let sessionResponse = response {
             session = sessionResponse
-            loginComplete()
+            loginComplete(session: Session(response: sessionResponse))
             print("Login Successful!")
         } else if let error = error {
             handleAuthenticationError(error)
@@ -111,25 +152,30 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
     
     private func navigateToHome() {
         if let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeTab") as? TabBarViewController {
-            UIApplication.shared.keyWindow?.rootViewController = tabBarController
-            UIApplication.shared.keyWindow?.makeKeyAndVisible()
+            UIApplication.shared.windows.first?.rootViewController = tabBarController
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
         }
     }
     
-    private func loginComplete() {
+    private func loginComplete(session: Session) {
         // Make Tab Bar Controller root controller on successful login
         navigateToHome()
         enableViews(true)
+//        saveUserSession(session)
     }
     
-    @IBAction func signUpPressed(_ sender: Any) {
-        
-        /* Open Udacity Sign Up URL */
-        if let url = URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated") {
-            let svc = SFSafariViewController(url: url)
-            self.present(svc, animated: true, completion: nil)
-        }
+//    private func saveUserSession(_ session: Session) {
+//        //TODO: Why Session can't be stored in UserDefaults
+//        //UserDefaults.standard.set(session, forKey: Constants.UserDefaults.userSession)
+//        //TODO: utilize set bool to keep the user logged in
+//        UserDefaults.standard.set(<#T##value: Bool##Bool#>, forKey: <#T##String#>)
+//        UserDefaults.standard.synchronize()
+//    }
+    
+    private func getUserSession() -> Session? {
+        return UserDefaults.standard.object(forKey: Constants.UserDefaults.userSession) as? Session
     }
+    
     
     /// Enables or disables the views to display the loading state.
     private func enableViews(_ isEnabled: Bool) {
@@ -141,8 +187,8 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     func udacityLogoStyling() {
-        let imageViewWidthConstraint = NSLayoutConstraint(item: udacityLogo, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80)
-        let imageViewHeightConstraint = NSLayoutConstraint(item: udacityLogo, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80)
+        let imageViewWidthConstraint = NSLayoutConstraint(item: udacityLogo!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80)
+        let imageViewHeightConstraint = NSLayoutConstraint(item: udacityLogo!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80)
         udacityLogo.addConstraints([imageViewWidthConstraint, imageViewHeightConstraint])
     }
     
@@ -162,22 +208,6 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         facebookLoginButton.layer.cornerRadius = 5
     }
     
-    @IBAction func loginWithFacebook(_ sender: Any) {
-        let manager = LoginManager()
-        manager.logIn(permissions: [.publicProfile, .email], viewController: self) { (result) in
-            switch result {
-            case .cancelled:
-                print("Facebook login cancelled")
-                break
-            case .failed(let error):
-                print("Facebook login failed: \(error.localizedDescription)")
-                break
-            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
-                print("Access token == \(accessToken)")
-                self.loginComplete()
-            }
-        }
-    }
     
     //TODO: create a GoogleButton which inherits UIButton and move styling logic in func awakeFromNib()
     func gmailButtonStyling() {
@@ -198,12 +228,6 @@ class LoginViewController: UIViewController, UINavigationControllerDelegate {
         
         gmailLoginButton.layer.cornerRadius = 5
     }
-    
-    @IBAction func loginWithGmail(_ sender: Any) {
-        GIDSignIn.sharedInstance()?.signIn()
-    }
-    
-    
     
 }
 

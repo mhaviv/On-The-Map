@@ -30,6 +30,42 @@ class ListViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
+    // MARK: - Actions
+    
+    @IBAction func refreshButtonPressed(_ sender: Any) {
+        self.tableView.reloadData()
+    }
+    
+    @IBAction func logoutPressed(_ sender: Any) {
+        TabBarViewController.sharedInstance().logout()
+        GIDSignIn.sharedInstance().signOut()
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! ListCell
+        let studentObject = students[indexPath.row]
+        cell.nameLabel.text = studentObject.firstname + " " + studentObject.lastName
+        cell.urlLabel.text = studentObject.mediaUrl
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if students.count == 0 {
+            enableViews(false)
+            showEmptyView(true)
+        } else {
+            showEmptyView(false)
+            enableViews(true)
+        }
+        return students.count
+    }
+    
+    // MARK: - Helpers
+    
     func getUserData() {
         ParseClient().getLocations { [weak self] (results) in
             guard let studentInfo = results else {
@@ -80,36 +116,5 @@ class ListViewController: UITableViewController {
             Spinner.start()
         }
     }
-    
-    @IBAction func refreshButtonPressed(_ sender: Any) {
-        self.tableView.reloadData()
-    }
-    
-    @IBAction func logoutPressed(_ sender: Any) {
-        TabBarViewController.sharedInstance().logout()
-        GIDSignIn.sharedInstance().signOut()
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! ListCell
-        let studentObject = students[indexPath.row]
-        cell.nameLabel.text = studentObject.firstname + " " + studentObject.lastName
-        cell.urlLabel.text = studentObject.mediaUrl
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if students.count == 0 {
-            enableViews(false)
-            showEmptyView(true)
-        } else {
-            showEmptyView(false)
-            enableViews(true)
-        }
-        return students.count
-    }
+        
 }

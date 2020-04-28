@@ -23,8 +23,8 @@ extension TabBarViewController {
         UdacityClient.sharedInstance().LogoutUser { [weak self] (session, error) in
             if error == nil {
                 if let loginViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-                    UIApplication.shared.keyWindow?.rootViewController = loginViewController
-                    UIApplication.shared.keyWindow?.makeKeyAndVisible()
+                    UIApplication.shared.windows.first?.rootViewController = loginViewController
+                    UIApplication.shared.windows.first?.makeKeyAndVisible()
                 }
                 
             } else if error != nil {

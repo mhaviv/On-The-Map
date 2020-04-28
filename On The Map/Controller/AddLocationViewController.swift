@@ -16,8 +16,6 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var mediaURLTextfield: UITextField!
     
-    
-    
     // Decide whether we are performing a POST or a PUT request based on locationID
     var locationID: String? // Is this needed?
     lazy var geocoder = CLGeocoder()
@@ -30,9 +28,8 @@ class AddLocationViewController: UIViewController {
         #endif
     }
     
-    /* Take in location string
-     Split string into address, city, state and country?
-     pass location string to geocoder */
+    // MARK: - Actions
+    
     @IBAction func geocode(_ sender: Any) {
         
         let location = locationTextField.text ?? ""
@@ -51,6 +48,21 @@ class AddLocationViewController: UIViewController {
         processGeocodeResponse(location: location, mediaURL: mediaURL)
     }
     
+    @IBAction func cancelClicked(_ sender: Any) {
+        if let nav = self.navigationController {
+            nav.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    // MARK: - Helpers
+    
+    /*
+     Take in location string
+     Split string into address, city, state and country?
+     pass location string to geocoder
+     */
     private func processGeocodeResponse(location locationString: String, mediaURL: String) {
         enableViews(false)
         geocoder.geocodeAddressString(locationString) { [weak self] (placemarkers, error) in
@@ -107,15 +119,10 @@ class AddLocationViewController: UIViewController {
         isEnabled ? Spinner.stop() : Spinner.start()
     }
     
-    @IBAction func cancelClicked(_ sender: Any) {
-        if let nav = self.navigationController {
-            nav.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
     
 }
+
+// MARK: - Intialization
 
 extension AddStudentRequest {
     init?(location: (CLLocation, name: String), mediaURL: String, userData: UserData) {

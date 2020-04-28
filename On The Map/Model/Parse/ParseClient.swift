@@ -54,4 +54,22 @@ class ParseClient {
             
         }
     }
+    
+    //TODO: Make function abide to PUT request not POST
+    public func updateLocations(completion: ((_ locations: [StudentData]?) -> ())?) {
+        APIManager.sharedInstance().putRequest(endpoint: .location(limit: 600, skip: 0, order: "-updatedAt")) { (data, response, error) in
+            guard error == nil, let data = data else {
+                completion?(nil)
+                return
+            }
+            
+            do {
+                let result: ParseResponse = try JSONDecoder().decode(ParseResponse<StudentData>.self, from: data)
+                completion?(result.results)
+            } catch {
+                print("Cannot Parse Location Data!")
+                completion?(nil)
+            }
+        }
+    }
 }

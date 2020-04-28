@@ -14,7 +14,6 @@ class UdacityClient {
     
     public func AuthenticateUser(username: String, password: String, completion: @escaping (_ response: SessionResponse?, _ error: Error?) -> Void) {
         
-        
         let encoder = JSONEncoder()
         
         let userPayload = UserPayload(username: username, password: password)
@@ -26,7 +25,7 @@ class UdacityClient {
             //UdacityClient().AuthenticateUser(username: username, password: password, data: data)
             APIManager.sharedInstance().postRequest(endpoint: APIConstants.Endpoint.session, data: encodedData) { (dataResp, response, error) in
                 guard let data = dataResp else {
-                    print(error?.localizedDescription)
+                    print(error?.localizedDescription as Any)
                     completion(nil, error)
 
                     return
@@ -80,7 +79,7 @@ class UdacityClient {
         if let xsrfCookie = xsrfCookie {
             APIManager.sharedInstance().deleteRequest(endpoint: APIConstants.Endpoint.session, cookie: xsrfCookie) { (dataResp, response, error) in
                 guard let data = dataResp else {
-                    print(error?.localizedDescription)
+                    print(error?.localizedDescription as Any)
                     completion(nil, error)
                     
                     return
@@ -93,7 +92,7 @@ class UdacityClient {
                 let decoder = JSONDecoder()
                 
                 do {
-                    let responseObject = try decoder.decode(Session.self, from: newData)
+                    let responseObject = try decoder.decode(SessionResponse.Session.self, from: newData)
                     
                     completion(responseObject, nil)
                 } catch {

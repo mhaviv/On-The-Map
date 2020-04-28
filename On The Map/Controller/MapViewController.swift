@@ -27,6 +27,21 @@ class MapViewController: UIViewController {
         getUserData()
     }
     
+    // MARK: - Actions
+    
+    @IBAction func refreshButtonPressed(_ sender: Any) {
+//        ParseClient.sharedInstance().updateLocations(completion: <#T##(([StudentData]?) -> ())?##(([StudentData]?) -> ())?##([StudentData]?) -> ()#>)
+    }
+    
+    
+    @IBAction func logoutPressed(_ sender: Any) {
+        // identify the data you need for logout, modify the logout function to take that data and call API function from logout.
+        TabBarViewController.sharedInstance().logout()
+        GIDSignIn.sharedInstance().signOut()
+    }
+    
+    // MARK: - Helpers
+    
     func setInitialMapLocation() {
         let regionRadius: CLLocationDistance = 200000
         func centerMapOnLocation(location: CLLocation) {
@@ -84,16 +99,6 @@ class MapViewController: UIViewController {
         }
     }
     
-    @IBAction func refreshButtonPressed(_ sender: Any) {
-        
-    }
-    
-    
-    @IBAction func logoutPressed(_ sender: Any) {
-        // identify the data you need for logout, modify the logout function to take that data and call API function from logout.
-        TabBarViewController.sharedInstance().logout()
-        GIDSignIn.sharedInstance().signOut()
-    }
     
 }
 

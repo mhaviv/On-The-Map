@@ -40,7 +40,7 @@ class APIManager: API {
     }
     
     // MARK: Resume Request Method
-    // Use this reusable method to create dataTask
+    // Reusable method to create dataTask
     private func resumeRequest(_ request: URLRequest, completion: @escaping(Data?, URLResponse?, Error?) -> Void) {
         URLSession.shared.dataTask(with: request) { (dataResp, response, error) in
             DispatchQueue.main.async {
@@ -64,6 +64,18 @@ class APIManager: API {
     //MARK: POST Request Method
     func postRequest(endpoint: APIConstants.Endpoint, data: Data? = nil, completion: @escaping(Data?, URLResponse?, Error?) -> ()) {
         guard let request = Self.request(data: data, urlString: endpoint.url(), type: .POST) else {
+            DispatchQueue.main.async {
+                completion(nil, nil, nil)
+            }
+            
+            return
+        }
+        resumeRequest(request, completion: completion)
+    }
+    
+    //MARK: PUT Request Method
+    func putRequest(endpoint: APIConstants.Endpoint, data: Data? = nil, completion: @escaping(Data?, URLResponse?, Error?) -> ()) {
+        guard let request = Self.request(data: data, urlString: endpoint.url(), type: .PUT) else {
             DispatchQueue.main.async {
                 completion(nil, nil, nil)
             }

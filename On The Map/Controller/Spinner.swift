@@ -21,7 +21,7 @@ open class Spinner: UIActivityIndicatorView {
     public static func start(style: UIActivityIndicatorView.Style = style, backColor: UIColor = baseBackColor, baseColor: UIColor = baseColor) {
         // Add observer to check for orientation change
         NotificationCenter.default.addObserver(self, selector: #selector(update), name: UIDevice.orientationDidChangeNotification, object: nil)
-        if spinner == nil, let window = UIApplication.shared.keyWindow {
+        if spinner == nil, let window = UIApplication.shared.windows.first {
             let frame = UIScreen.main.bounds
             spinner = UIActivityIndicatorView(frame: frame)
             spinner!.backgroundColor = backColor

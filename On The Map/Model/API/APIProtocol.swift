@@ -15,6 +15,8 @@ protocol API: class {
     
     func postRequest(endpoint: APIConstants.Endpoint, data: Data?, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ())
     
+    func putRequest(endpoint: APIConstants.Endpoint, data: Data?, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ())
+    
     func deleteRequest(endpoint: APIConstants.Endpoint, cookie: HTTPCookie, completion: @escaping(_ data: Data?, _ urlResponse: URLResponse?, _ error: Error?) -> ())
 
 }

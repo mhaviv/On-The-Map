@@ -37,8 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
         // Make Tab Bar Controller root controller on successful login
         if let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeTab") as? TabBarViewController {
-            UIApplication.shared.keyWindow?.rootViewController = tabBarController
-            UIApplication.shared.keyWindow?.makeKeyAndVisible()
+            UIApplication.shared.windows.first?.rootViewController = tabBarController
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
         }
         
         // Perform any operations on signed in user here.
