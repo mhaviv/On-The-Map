@@ -16,7 +16,6 @@ class APIConstants {
         case GET
         case POST
         case DELETE
-        case PUT
     }
     
     enum Endpoint {

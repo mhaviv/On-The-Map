@@ -30,11 +30,7 @@ class MapViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func refreshButtonPressed(_ sender: Any) {
-        self.enableViews(false)
-        for annotation in mapView.annotations{
-            mapView.removeAnnotation(annotation)
-        }
-        getUserData()
+        refreshAnnotations()
     }
     
     
@@ -56,6 +52,15 @@ class MapViewController: UIViewController {
         // set initial location in NYC
         let initialLocation = CLLocation(latitude: 40.7829, longitude: -73.9654)
         centerMapOnLocation(location: initialLocation)
+    }
+    
+    func refreshAnnotations() {
+        self.enableViews(false)
+        for annotation in mapView.annotations{
+            mapView.removeAnnotation(annotation)
+        }
+        //getUserData()
+        displayLocations()
     }
     
     

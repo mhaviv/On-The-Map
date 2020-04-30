@@ -73,18 +73,6 @@ class APIManager: API {
         resumeRequest(request, completion: completion)
     }
     
-    //MARK: PUT Request Method
-    func putRequest(endpoint: APIConstants.Endpoint, data: Data? = nil, completion: @escaping(Data?, URLResponse?, Error?) -> ()) {
-        guard let request = Self.request(data: data, urlString: endpoint.url(), type: .PUT) else {
-            DispatchQueue.main.async {
-                completion(nil, nil, nil)
-            }
-            
-            return
-        }
-        resumeRequest(request, completion: completion)
-    }
-    
     //MARK: Delete Request Method
     func deleteRequest(endpoint: APIConstants.Endpoint, cookie: HTTPCookie, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         guard var request = Self.request(data: nil, urlString: endpoint.url(), type: .DELETE) else {

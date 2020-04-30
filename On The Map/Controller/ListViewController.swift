@@ -27,13 +27,13 @@ class ListViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.tableView.reloadData()
+        refreshTableView()
     }
     
     // MARK: - Actions
     
     @IBAction func refreshButtonPressed(_ sender: Any) {
-        self.tableView.reloadData()
+        refreshTableView()
     }
     
     @IBAction func logoutPressed(_ sender: Any) {
@@ -65,6 +65,12 @@ class ListViewController: UITableViewController {
     }
     
     // MARK: - Helpers
+    
+    func refreshTableView() {
+//        getUserData()
+        self.enableViews(false)
+        self.tableView.reloadData()
+    }
     
     func getUserData() {
         ParseClient().getLocations { [weak self] (results) in
